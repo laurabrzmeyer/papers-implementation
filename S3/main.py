@@ -45,7 +45,7 @@ for directory in DATABASES:
                 j_len = len(tcs)
                 MF = [[0 for _ in range(j_len)] for _ in range(i_len)]
                 j = 0
-              
+                data_win = data_input[(data_input['Cycle']<c)&(data_input['Cycle']>=c-win)]
                 Prio = []
               
                 for tc in tcs:
@@ -63,7 +63,7 @@ for directory in DATABASES:
 
                     j = j + 1  
    
-                df = tools.getPrioROCKET(tcs, Prio)
+                df = tools.getPrioROCKET(data_win, tcs, Prio)
                 df = df.sample(frac=1).reset_index(drop=True)
                 
                 order_h1 = list(df.sort_values('Prio', ascending=True)['Test'])
