@@ -1,10 +1,10 @@
 import pandas as pd
 import numpy as np
-import tools, os, sys, pickle
+import os, s3
 import seaborn as sns
-from ast import literal_eval
 from pathlib import Path
 from sklearn.utils import shuffle
+from Tools import evaluation as ev
 
 INTERACTIONS = 30
 INPUT_PATH = 'Data/'
@@ -56,20 +56,20 @@ for directory in DATABASES:
                     
                     for i in range(0, i_len):
                         execution = exec_tc[exec_tc['Cycle']==(c-(i+1))]
-                        MF[i][j] = tools.getMF(execution)
+                        MF[i][j] = s3.getMF(execution)
                         
-                    P_tc = tools.getPrioMF(MF, j, WIN)
+                    P_tc = s3.getPrioMF(MF, j, WIN)
                     Prio.append(P_tc)
 
                     j = j + 1  
    
-                df = tools.getPrioROCKET(data_win, tcs, Prio)
+                df = s3.getPrioROCKET(data_win, tcs, Prio)
                 df = df.sample(frac=1).reset_index(drop=True)
                 
                 order_h1 = list(df.sort_values('Prio', ascending=True)['Test'])
-                apfd_h1 = tools.get_apfd(order_h1, present)
+                apfd_h1 = ev.get_apfd(order_h1, present)
                 order_h2 = list(df.sort_values('Prio_ROCKET', ascending=True)['Test'])
-                apfd_h2 = tools.get_apfd(order_h2, present)
+                apfd_h2 = ev.get_apfd(order_h2, present)
 
             else:
                 order_h1, order_h2 = ([] for i in range(2))
@@ -85,11 +85,11 @@ for directory in DATABASES:
 
     df1 = pd.DataFrame({'Experiment':EXP, 'Cycle':CYCLES, 'Version':VERSIONS, 'APFD':APFD1, 'Order':Orders_H1})
     df1['Method'] = 'ROCKET without Time'
-    df1_mean = tools.get_apfd_mean(df1)
+    df1_mean = ev.get_apfd_mean(df1)
 
     df2 = pd.DataFrame({'Experiment':EXP, 'Cycle':CYCLES, 'Version':VERSIONS, 'APFD':APFD2, 'Order':Orders_H2})
     df2['Method'] = 'ROCKET with Time'
-    df2_mean = tools.get_apfd_mean(df2)
+    df2_mean = ev.get_apfd_mean(df2)
 
     df = pd.concat([df1, df2], ignore_index=True)
     df.to_csv(path+'/S3_Graal'+str(INTERACTIONS)+'.csv', sep=';', index=False)
