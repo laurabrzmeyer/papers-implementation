@@ -29,6 +29,13 @@ class input_data():
     '''
     def get_current_cycle(self):
         return self.cycles[self.in_cycle]
+    
+    '''
+    Auxiliar function to set the Result of not selected tests as not executed in case of selection
+    '''
+    def update_past(self, selection):
+        not_executed_tests = set(self.tc_availables) - set(selection)
+        self.data.loc[(self.data['Cycle']==self.in_cycle)&(self.data['Test'].isin(not_executed_tests)), ['Result']] = -1
 
     '''
     Auxiliar function to move to next cycle
