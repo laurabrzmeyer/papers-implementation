@@ -1,3 +1,21 @@
+"""
+RETECS METHOD
+* This script was adapted from Helge Spieker's rewards.py code 
+* Accessed in 2022
+* Available at: https://bitbucket.org/HelgeS/retecs/src/master/rewards.py
+
+Implementation by Maria Laura Brzezinski Meyer
+Last modification: 06-12-2024
+
+References:
+    H. Spieker, A. Gotlieb, D. Marijan, and M. Mossige, 
+    "Reinforcement learning for automatic test case prioritization and selection in continuous integration," 
+    26th ACM SIGSOFT International Symposium on Software Testing and Analysis (ISSTA 2017), Santa Barbara, CA, USA, 2017, pp. 12-22, 
+    doi: 10.1145/3092703.3092709.
+    Availble at: https://dl.acm.org/doi/10.1145/3092703.3092709
+
+"""
+
 import numpy as np
 
 def failcount(result, sc=None):

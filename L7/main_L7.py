@@ -1,6 +1,24 @@
+"""
+RETECS METHOD
+* This script was adapted from Helge Spieker's run_experiment_common.py code 
+* Accessed in 2022
+* Available at: https://bitbucket.org/HelgeS/retecs/src/master/run_experiment_common.py
+
+Implementation by Maria Laura Brzezinski Meyer
+Last modification: 06-12-2024
+
+References:
+    H. Spieker, A. Gotlieb, D. Marijan, and M. Mossige, 
+    "Reinforcement learning for automatic test case prioritization and selection in continuous integration," 
+    26th ACM SIGSOFT International Symposium on Software Testing and Analysis (ISSTA 2017), Santa Barbara, CA, USA, 2017, pp. 12-22, 
+    doi: 10.1145/3092703.3092709.
+    Availble at: https://dl.acm.org/doi/10.1145/3092703.3092709
+
+"""
+
 import multiprocessing
 from pathlib import Path
-import agents, reward, scenarios, retecs
+import agents, reward, scenarios, l7
 
 ITERATIONS = 30
 CI_CYCLES = 1000
@@ -50,11 +68,10 @@ def run_experiments(exp_fun, datasets, ScenarioType, parallel=PARALLEL):
 
 def exp_run_industrial_datasets(iteration, datasets, ScenarioType):
     ags = [
-        lambda: (
-            agents.TableauAgent(histlen=retecs.DEFAULT_HISTORY_LENGTH, learning_rate=retecs.DEFAULT_LEARNING_RATE, state_size=retecs.DEFAULT_STATE_SIZE, action_size=retecs.DEFAULT_NO_ACTIONS, epsilon=retecs.DEFAULT_EPSILON),
-            retecs.preprocess_discrete, reward.timerank),
-        lambda: (agents.NetworkAgent(histlen=retecs.DEFAULT_HISTORY_LENGTH, state_size=retecs.DEFAULT_STATE_SIZE, action_size=1, hidden_size=retecs.DEFAULT_NO_HIDDEN_NODES), 
-                 retecs.preprocess_continuous, reward.tcfail)
+        lambda: (agents.TableauAgent(histlen=l7.DEFAULT_HISTORY_LENGTH, learning_rate=l7.DEFAULT_LEARNING_RATE, state_size=l7.DEFAULT_STATE_SIZE, action_size=l7.DEFAULT_NO_ACTIONS, epsilon=l7.DEFAULT_EPSILON),
+                 l7.preprocess_discrete, reward.timerank),
+        lambda: (agents.NetworkAgent(histlen=l7.DEFAULT_HISTORY_LENGTH, state_size=l7.DEFAULT_STATE_SIZE, action_size=1, hidden_size=l7.DEFAULT_NO_HIDDEN_NODES), 
+                 l7.preprocess_continuous, reward.tcfail)
     ]
 
     for i, get_agent in enumerate(ags):
@@ -69,7 +86,7 @@ def exp_run_industrial_datasets(iteration, datasets, ScenarioType):
                 output_path = f'{OUTPUT_PATH}/{sc}_{ScenarioType}/'
                 Path(output_path).mkdir(parents=True, exist_ok=True)
 
-                rl_learning = retecs.PrioLearning(agent=agent,
+                rl_learning = l7.PrioLearning(agent=agent,
                                                   scenario_provider=scenario,
                                                   reward_function=reward_fun,
                                                   preprocess_function=preprocessor,
