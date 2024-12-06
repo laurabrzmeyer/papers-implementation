@@ -1,104 +1,114 @@
 import pandas as pd
-import numpy as np
-import os, s3
-import seaborn as sns
+import os
 from pathlib import Path
-from sklearn.utils import shuffle
-from Tools import evaluation as ev
+import multiprocessing
+import time
+from s3 import S3
 
 INTERACTIONS = 30
-INPUT_PATH = 'Data/'
-OUTPUT_PATH = 'Output_S3/'
-DATABASES = ['Database1', 'Database2']
+DATASETS = ['Dataset1', 'Dataset2']
+INPUT_PATH = 'Path/To/Input/'
+OUTPUT_PATH = 'Path/To/Save/Outputs/'
+WIN = 3
+PARALLEL_POOL_SIZE = 8
+PARALLEL = True
+METHOD = 'S3'
+VARIANTS = ['S3.1.1', 'S3.1.2', 'S3.2.1', 'S3.2.2']
 
-cols_essential = ['Cycle', 'Version', 'Test', 'Status', 'Verdict', 'Duration', 'Bugs']
 
-for directory in DATABASES:
+def run_experiment(INTERACTIONS, INPUT_PATH, OUTPUT_PATH, input_file, WIN, method, variants, budget=1.0):
 
     print(INTERACTIONS, ' experiments for :', directory, '...')
 
     path = os.path.join(OUTPUT_PATH, directory) 
     Path(path).mkdir(parents=True, exist_ok=True) 
 
-    data_input = pd.read_csv(INPUT_PATH+directory+'.csv', sep=';')[cols_essential]
+    data_input = pd.read_csv(f'{INPUT_PATH}/{input_file}.csv', sep=';', dtype={'Cycle':int, 'Version':str, 'Test':str, 'Result':int})
 
-    byCycle = data_input.groupby('Cycle')
-    cycles = list(byCycle.groups.keys())
-  
-    APFD1, APFD2, Orders_H1, Orders_H2 = ([] for i in range(4))
-    EXP, VERSIONS, CYCLES = ([] for i in range(3)]
-    WIN = 5
+    OREDERS, SELEC, APFD, NAPFD = ({} for i in range(4))
+    for n in variants:
+        OREDERS[n] = []
+        SELEC[n] = []
+        APFD[n] = []
+        NAPFD[n] = []
+
+    EXP, VERSIONS, CYCLES = [[] for i in range(3)]
 
     for exp in range(0,INTERACTIONS):
+
+        byCycle = data_input.groupby('Cycle')
+        cycles = list(byCycle.groups.keys())
+
+        interaction = 1
+
+        M = {}
+        past_data = {}
+        for n in variants:
+            M[n] = S3(n, WIN, data_input)
+            past_data[n] = pd.DataFrame()
 
         for c in cycles:
             
             present = byCycle.get_group(c)
+            tc_availables = list(present['Test'].unique())
             version_c = list(present['Version'].unique())[0]
-                
-            byTC = present.groupby('Test')
-            tcs = list(byTC.groups.keys())
-
-            if(c>5):
-
-                i_len = c
-                j_len = len(tcs)
-                MF = [[0 for _ in range(j_len)] for _ in range(i_len)]
-                j = 0
-                data_win = data_input[(data_input['Cycle']<c)&(data_input['Cycle']>=c-win)]
-                Prio = []
-              
-                for tc in tcs:
-
-                    # ROCKET
-                    past_data = data_input[data_input['Cycle']<c]
-                    exec_tc = past_data[past_data['Test']==tc]
-                    
-                    for i in range(0, i_len):
-                        execution = exec_tc[exec_tc['Cycle']==(c-(i+1))]
-                        MF[i][j] = s3.getMF(execution)
-                        
-                    P_tc = s3.getPrioMF(MF, j, WIN)
-                    Prio.append(P_tc)
-
-                    j = j + 1  
-   
-                df = s3.getPrioROCKET(data_win, tcs, Prio)
-                df = df.sample(frac=1).reset_index(drop=True)
-                
-                order_h1 = list(df.sort_values('Prio', ascending=True)['Test'])
-                apfd_h1 = ev.get_apfd(order_h1, present)
-                order_h2 = list(df.sort_values('Prio_ROCKET', ascending=True)['Test'])
-                apfd_h2 = ev.get_apfd(order_h2, present)
-
+            if(budget==1.0):
+                bntc = len(present)
             else:
-                order_h1, order_h2 = ([] for i in range(2))
-                apfd_h1, apfd_h2 = [np.nan, np.nan]
+                bntc = round(budget*len(present))
 
-            Orders_H1.append(order_h1)
-            Orders_H2.append(order_h2)
-            APFD1.append(apfd_h1)
-            APFD2.append(apfd_h2)
+            order, selection = [{} for i in range(2)]
+            for n in variants:
+                # Change cycle
+                if(interaction>1):
+                    M[n].next_cycle(tc_availables)
+                # Get order if WIN cycles have already passed
+                if(interaction>WIN):
+                    order[n] = M[n].get_prio(past_data[n])
+                    selection[n] = order[n][0:bntc]
+                    add_to_memory = present[present['Test'].isin(selection[n])]
+                    past_data[n] = pd.concat([past_data[n], add_to_memory], ignore_index=True)
+                    if(budget==1.0):
+                        assert len(order[n])==len(selection[n])
+                        assert len(add_to_memory)==len(present)
+                else:
+                    order[n] = []
+                    selection[n] = []
+                    past_data[n] = pd.concat([past_data[n], present], ignore_index=True)
+                assert M[n].get_current_cycle()==c
+                OREDERS[n].append(order[n])
+                SELEC[n].append(selection[n])
+                
             EXP.append(exp)
             VERSIONS.append(version_c)
             CYCLES.append(c)
 
-    df1 = pd.DataFrame({'Experiment':EXP, 'Cycle':CYCLES, 'Version':VERSIONS, 'APFD':APFD1, 'Order':Orders_H1})
-    df1['Method'] = 'ROCKET without Time'
-    df1_mean = ev.get_apfd_mean(df1)
+            interaction = interaction+1
 
-    df2 = pd.DataFrame({'Experiment':EXP, 'Cycle':CYCLES, 'Version':VERSIONS, 'APFD':APFD2, 'Order':Orders_H2})
-    df2['Method'] = 'ROCKET with Time'
-    df2_mean = ev.get_apfd_mean(df2)
+    concat_df = pd.DataFrame()
+    for n in variants:
+        df = pd.DataFrame({'Experiment':EXP, 'Cycle':CYCLES, 'Version':VERSIONS, 'Order':OREDERS[n], 'Selection':SELEC[n]})
+        df['Method'] = n
+        concat_df = pd.concat([concat_df, df], ignore_index=True)
 
-    df = pd.concat([df1, df2], ignore_index=True)
-    df.to_csv(path+'/S3_Graal'+str(INTERACTIONS)+'.csv', sep=';', index=False)
+    concat_df.to_csv(f'{path}/{method}_Graal{str(INTERACTIONS)}.csv', sep=';', index=False)
+    
+    print('Done for {} {}!'.format(input_file))
 
-    df_mean = pd.concat([df1_mean, df2_mean], ignore_index=True)
-    df_mean.to_csv(path+'/S3_APFD.csv', sep=';', index=False)
-    sns.set(rc={'figure.figsize':(10,5)})
-    swarm_plot = sns.boxplot(data=df_mean, x="APFD", y="Method")
-    fig = swarm_plot.get_figure()
-    fig.savefig(path+"/S3_APFD.png") 
+if __name__ == '__main__':
 
-    print('Done!')
+    start_time = time.time()
+  
+    items = []
+    for d in DATASETS:
+        items.append((INTERACTIONS, INPUT_PATH, OUTPUT_PATH, d, WIN, METHOD, VARIANTS))
+
+    if PARALLEL:
+        p = multiprocessing.Pool(PARALLEL_POOL_SIZE)
+        avg_res = p.starmap(run_experiment, items)
+    else:
+        for i in items:
+            run_experiment(i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7])
+    
+    time_spent = round((time.time()-start_time)/60, 2)
+    print('All experiments done in {} minutes!'.format(time_spent))
