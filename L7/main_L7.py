@@ -12,13 +12,13 @@ References:
     "Reinforcement learning for automatic test case prioritization and selection in continuous integration," 
     26th ACM SIGSOFT International Symposium on Software Testing and Analysis (ISSTA 2017), Santa Barbara, CA, USA, 2017, pp. 12-22, 
     doi: 10.1145/3092703.3092709.
-    Availble at: https://dl.acm.org/doi/10.1145/3092703.3092709
+    Available at: https://dl.acm.org/doi/10.1145/3092703.3092709
 
 """
 
 import multiprocessing
 from pathlib import Path
-import agents, reward, scenarios, l7
+import agents, rewards, scenarios, l7
 
 ITERATIONS = 30
 CI_CYCLES = 1000
@@ -46,9 +46,9 @@ reward_names = {
 }
 
 reward_funs = {
-    'failcount': reward.failcount,
-    'timerank': reward.timerank,
-    'tcfail': reward.tcfail
+    'failcount': rewards.failcount,
+    'timerank': rewards.timerank,
+    'tcfail': rewards.tcfail
 }
 
 env_names = {
@@ -69,9 +69,9 @@ def run_experiments(exp_fun, datasets, ScenarioType, parallel=PARALLEL):
 def exp_run_industrial_datasets(iteration, datasets, ScenarioType):
     ags = [
         lambda: (agents.TableauAgent(histlen=l7.DEFAULT_HISTORY_LENGTH, learning_rate=l7.DEFAULT_LEARNING_RATE, state_size=l7.DEFAULT_STATE_SIZE, action_size=l7.DEFAULT_NO_ACTIONS, epsilon=l7.DEFAULT_EPSILON),
-                 l7.preprocess_discrete, reward.timerank),
+                 l7.preprocess_discrete, reward_funs.timerank),
         lambda: (agents.NetworkAgent(histlen=l7.DEFAULT_HISTORY_LENGTH, state_size=l7.DEFAULT_STATE_SIZE, action_size=1, hidden_size=l7.DEFAULT_NO_HIDDEN_NODES), 
-                 l7.preprocess_continuous, reward.tcfail)
+                 l7.preprocess_continuous, rewards.tcfail)
     ]
 
     for i, get_agent in enumerate(ags):

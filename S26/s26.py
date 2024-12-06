@@ -16,12 +16,11 @@ References:
     "Prioritizing test cases for resource constraint environments using historical test case performance data", 
     2009 2nd IEEE International Conference on Computer Science and Information Technology, pp. 190-195, 2009,
     doi: 10.1109/ICCSIT.2009.5234968.
-    Availble at: https://ieeexplore.ieee.org/abstract/document/5234968
+    Available at: https://ieeexplore.ieee.org/abstract/document/5234968
 
 """
 
 import pandas as pd
-import numpy as np
 
 class S26():
     '''
@@ -116,7 +115,7 @@ class S26():
         df = pd.DataFrame({'Test':self.INP.tc_availables, 'Priority':P})
         
         # Need to cut if selection != None to calculate self.ExecCounter
-        if(selction!=Non):
+        if(selection!=None):
             self.df_prio = df.sort_values(by='Priority', ascending=False).copy()[0:selection]
         else:
             self.df_prio = df.copy()

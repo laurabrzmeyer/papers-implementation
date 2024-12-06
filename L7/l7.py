@@ -12,7 +12,7 @@ References:
     "Reinforcement learning for automatic test case prioritization and selection in continuous integration," 
     26th ACM SIGSOFT International Symposium on Software Testing and Analysis (ISSTA 2017), Santa Barbara, CA, USA, 2017, pp. 12-22, 
     doi: 10.1145/3092703.3092709.
-    Availble at: https://dl.acm.org/doi/10.1145/3092703.3092709
+    Available at: https://dl.acm.org/doi/10.1145/3092703.3092709
 
 """
 
@@ -34,6 +34,31 @@ DEFAULT_PRINT_LOG = False
 DEFAULT_PLOT_GRAPHS = False
 DEFAULT_NO_HIDDEN_NODES = 12
 DEFAULT_TODAY = datetime.datetime.today()
+
+def recency_weighted_avg(values, alpha):
+    return sum(np.power(alpha, range(0, len(values))) * values) / len(values)
+
+
+def preprocess_continuous(state, scenario_metadata, histlen):
+    if scenario_metadata['maxExecTime'] > scenario_metadata['minExecTime']:
+        time_since = (scenario_metadata['maxExecTime'] - state['Week']).total_seconds() / (
+            scenario_metadata['maxExecTime'] - scenario_metadata['minExecTime']).total_seconds()
+    else:
+        time_since = 0
+
+    history = [1 if res else 0 for res in state['LR'][0:histlen]]
+
+    if len(history) < histlen:
+        history.extend([1] * (histlen - len(history)))
+
+    row = [
+        state['Duration'] / scenario_metadata['totalTime'],
+        time_since
+    ]
+    row.extend(history)
+
+    return tuple(row)
+
 
 def preprocess_discrete(state, scenario_metadata, histlen):
     if scenario_metadata['maxDuration'] > scenario_metadata['minDuration']:

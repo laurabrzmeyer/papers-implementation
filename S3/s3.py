@@ -9,7 +9,7 @@ References:
     "Test Case Prioritization for Continuous Regression Testing: An Industrial Case Study," 
     2013 IEEE International Conference on Software Maintenance, Eindhoven, Netherlands, 2013, pp. 540-543, 
     doi: 10.1109/ICSM.2013.91.
-    Availble at: https://ieeexplore.ieee.org/document/6676952
+    Available at: https://ieeexplore.ieee.org/document/6676952
 
 """
 

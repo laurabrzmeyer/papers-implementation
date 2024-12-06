@@ -9,7 +9,7 @@ References:
     "Improving the effectiveness of test suite through mining historical data,"
     2014 11th Working Conf. on Mining Software Repositories (MSR), pp. 142–151, 
     doi: 10.1145/2597073.2597084.
-    Availble at: https://dl.acm.org/doi/10.1145/2597073.2597084
+    Available at: https://dl.acm.org/doi/10.1145/2597073.2597084
 
 """
 
