@@ -6,7 +6,6 @@ Last modification: 06-12-2024
 
 References:
 
-    D. Marijan, A. Gotlieb and S. Sen, 
     J. Anderson, S. Salem and H. Do,
     "Improving the effectiveness of test suite through mining historical data,"
     2014 11th Working Conf. on Mining Software Repositories (MSR), pp. 142–151, 
