@@ -8,17 +8,17 @@ Welcome! This is the implementation of the **TOPSIS** method.
 
 ## TOPSIS/FTOPSIS Description
 
-The Technique for Order Preference by Similarity to Ideal Solution (**TOPSIS**) was first introduced in the *Multiple Attribute Decision Making* book [Hwang (1981)](https://link.springer.com/book/10.1007/978-3-642-48318-9). 
+The Technique for Order Preference by Similarity to Ideal Solution (**TOPSIS**) was first introduced in the *Multiple Attribute Decision Making* book (C.-L. Hwang and K. Yoon (1981)). 
 It is a method for decision support when multiple conflict criteria are present. 
 This technique enables to identify the alternative with the smallest geometric distance from the positive ideal solution (*PIS*) and the largest geometric distance from the negative ideal solution (*NIS*). 
 Consequently, the alternatives can be ranked in accordance with their degree of similarity to *PIS* and dissimilarity to *NIS*.
 
-The combination of the **TOPSIS** and fuzzy principles is done by Tahvili et al. (2016), therefore, the **FTOPSIS** method is implemented. 
+The combination of the **TOPSIS** and fuzzy principles is done by S. Tahvili et al. (2016), therefore, the **FTOPSIS** method is implemented. 
 In this approach, each test case is represented by a vector composed of the membership degree for four criteria: fault detection probability, time efficiency, cost, and requirement coverage. 
 The fuzzy positive and negative ideal solutions are also vectors. The test case priority is then defined by the distance of its vector from the positive and negative vectors. 
 Since the values for each criterion (fault detection probability, time efficiency, cost, and requirement coverage) were qualitative, the authors chose to use fuzzy numbers for their representation. 
 
-However, in our case, it is possible to quantify each criterion directly. Therefore, we will employ the **TOPSIS** technique, rather than **FTOPSIS**, in the implementation of the approach suggested by Tahvili et al. (2016).
+However, in our case, it is possible to quantify each criterion directly. Therefore, we will employ the **TOPSIS** technique, rather than **FTOPSIS**, in the implementation of the approach suggested by S. Tahvili et al. (2016).
 The fault detection probability (*c1*) is calculated as the number of times the test has failed divided by the number of times it has been executed in the previous versions. 
 The time efficiency (*c2*) can be represented by the execution time of each test. For our manual executions, the execution time of the tests is not a reliable data point. 
 Consequently, the *c2* criterion is included in one variation of the method and excluded in another. 
@@ -55,10 +55,13 @@ The characteristics of the two **S22** varieties are summarized in the table bel
 
 
 - References:
-    * Young-Jou Lai, Ting-Yun Liu, Ching-Lai Hwang, *"TOPSIS for MODM,"* European Journal of Operational Research, Volume 76, Issue 3, 1994, Pages 486-500, ISSN 0377-2217, doi: 10.1016/0377-2217(94)90282-8.
+    * Y.-J. Lai, T.-Y. Liu, and C.-L. Hwang, *"TOPSIS for MODM,"* European Journal of Operational Research, Volume 76, Issue 3, 1994, Pages 486-500, ISSN 0377-2217, doi: 10.1016/0377-2217(94)90282-8.
     * [TOPSIS paper](https://www.sciencedirect.com/science/article/pii/0377221794902828)
       
-    * Tahvili, S., Afzal, W., Saadatmand, M., Bohlin, M., Sundmark, D., Larsson, S. (2016). *"Towards Earlier Fault Detection by Value-Driven Prioritization of Test Cases Using Fuzzy TOPSIS,"* Latifi, S. (eds) Information Technology: New Generations. Advances in Intelligent Systems and Computing, vol 448. Springer, doi: 10.1007/978-3-319-32467-8_65.
+    * S. Tahvili, W. Afzal, M. Saadatmand, M. Bohlin, D. Sundmark, and S. Larsson (2016). *"Towards Earlier Fault Detection by Value-Driven Prioritization of Test Cases Using Fuzzy TOPSIS,"* Latifi, S. (eds) Information Technology: New Generations. Advances in Intelligent Systems and Computing, vol 448. Springer, doi: 10.1007/978-3-319-32467-8_65.
     * [FTOPSIS paper](https://doi.org/10.1007/978-3-319-32467-8_65)
+      
+    * C.-L. Hwang and K. Yoon (1981). *"Multiple attribute decision making,"* Springer Berlin, Heidelberg, 1 edition.
+    * [Book Multiple Attribute Decision Making](https://link.springer.com/book/10.1007/978-3-642-48318-9)
     
     
