@@ -1,5 +1,6 @@
 """
 FAZ and EXTFAZ METHODs
+Last modification: 06-12-2024
 
 Implementation by Maria Laura Brzezinski Meyer
 
@@ -97,7 +98,7 @@ class S26():
     '''
     Function to prioritize the tests at the present cycle
     '''
-    def get_prio(self, selection==None):                       
+    def get_prio(self, selection=None):                       
             
         P = []
 
