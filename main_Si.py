@@ -69,7 +69,7 @@ def run_experiment(INTERACTIONS, INPUT_PATH, OUTPUT_PATH, input_file, WIN, metho
                     INP.next_cycle()
                 # Get order if WIN cycles have already passed
                 if(interaction>WIN):
-                    order[n] = M[n].get_prio()
+                    order[n] = M[n].get_prio(slection=None)
                     selection[n] = order[n][0:bntc]
                     # In case of selection, data of the current cycle for not selected tests will not be available in the next cycle
                     if(budget<1.0):
