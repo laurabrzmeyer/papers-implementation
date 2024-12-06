@@ -252,7 +252,7 @@ class S22():
     '''
     Function to prioritize the tests at the present cycle
     '''
-    def get_prio(self):
+    def get_prio(self, selection=None):
 
         cycle = self.INP.cycle
         
