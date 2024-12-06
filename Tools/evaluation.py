@@ -1,6 +1,6 @@
 def get_bugs(data):
 
-    data_fail = data[data['Verdict']==1]
+    data_fail = data[data['Result']==1]
     bugs = list(data_fail['Bugs'].unique())
     bugs_in_data = []
 
@@ -15,25 +15,25 @@ def get_bugs(data):
 
     return bugs_in_data
 
-def get_apfd(order, present, LabelType=='Verdict'):
+def get_apfd(order, present, Scenario='Verdict'):
 
     list_fails = []
     i = 1
 
-    if(LabelType=='Verdict'):
+    if(Scenario=='Verdict'):
         for tc in order:
-            s = list(present[present['Test']==tc][LabelType].unique())
+            s = list(present[present['Test']==tc]['Result'].unique())
             if(s[0]==1):
                 list_fails.append(i)
             i = i + 1
             
-    elif(LabelType=='Issue'):
+    elif(Scenario=='Issue'):
         list_bugs = get_bugs(present)
         bugs_already_know = []
         for tc in order:
             s = present[present['Test']==tc]
             assert len(s) == 1
-            if(list(s[LabelType])[0]==1):
+            if(list(s['Result'])[0]==1):
                 b = get_bugs(s)
                 if(len(b)>0):
                     if(len(set(b)-set(bugs_already_know))>0):
@@ -42,7 +42,7 @@ def get_apfd(order, present, LabelType=='Verdict'):
             i = i + 1
 
     else:
-        assert 0==1, 'Error! LabelType not available!'
+        assert 0==1, 'Error! {} Scenario not available!'.format(Scenario)
 
     try:
         apfd = 1 - (sum(list_fails)/(len(order)*len(list_fails))) + (1/(2*len(order)))
