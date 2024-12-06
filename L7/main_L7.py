@@ -1,6 +1,6 @@
 import multiprocessing
 from pathlib import Path
-import agents, reward, scenarios, l7
+import agents, reward, scenarios, retecs
 
 ITERATIONS = 30
 CI_CYCLES = 1000
@@ -12,8 +12,6 @@ PARALLEL_POOL_SIZE = 5
 RUN_EXPERIMENT = True
 DATASETS = ['Dataset1', 'Dataset2']
 SCENARIOS_TYPES = ['Verdict', 'Issue']
-
-cols_essential = ['ID', 'Cycle', 'Version', 'Test', 'Result', 'Bugs', 'TE', 'CalcPrio', 'LastRun', 'LR']
 
 method_names = {
     'mlpclassifier': 'Network',
@@ -40,22 +38,23 @@ env_names = {
     'iofrol': 'Dataset 2'
 }
 
-def run_experiments(exp_fun, datasets, ScenarioType, cols_essential, parallel=PARALLEL):
+def run_experiments(exp_fun, datasets, ScenarioType, parallel=PARALLEL):
     if parallel:
         p = multiprocessing.Pool(PARALLEL_POOL_SIZE)
         items = []
         for i in range(ITERATIONS):
-            items.append((i, datasets, ScenarioType, cols_essential))
+            items.append((i, datasets, ScenarioType))
         avg_res = p.starmap(exp_fun, items)
     else:
-        avg_res = [exp_fun(i, datasets, ScenarioType, cols_essential) for i in range(ITERATIONS)]
+        avg_res = [exp_fun(i, datasets, ScenarioType) for i in range(ITERATIONS)]
 
-def exp_run_industrial_datasets(iteration, datasets, ScenarioType, cols_essential):
+def exp_run_industrial_datasets(iteration, datasets, ScenarioType):
     ags = [
-        lambda: (agents.TableauAgent(histlen=l7.DEFAULT_HISTORY_LENGTH, learning_rate=l7.DEFAULT_LEARNING_RATE, state_size=l7.DEFAULT_STATE_SIZE, action_size=l7.DEFAULT_NO_ACTIONS, epsilon=l7.DEFAULT_EPSILON), 
-                 l7.preprocess_discrete, l7.timerank),
-        lambda: (agents.NetworkAgent(histlen=l7.DEFAULT_HISTORY_LENGTH, state_size=l7.DEFAULT_STATE_SIZE, action_size=1, hidden_size=l7.DEFAULT_NO_HIDDEN_NODES), 
-                 l7.preprocess_continuous, l7.tcfail)
+        lambda: (
+            agents.TableauAgent(histlen=retecs.DEFAULT_HISTORY_LENGTH, learning_rate=retecs.DEFAULT_LEARNING_RATE, state_size=retecs.DEFAULT_STATE_SIZE, action_size=retecs.DEFAULT_NO_ACTIONS, epsilon=retecs.DEFAULT_EPSILON),
+            retecs.preprocess_discrete, reward.timerank),
+        lambda: (agents.NetworkAgent(histlen=retecs.DEFAULT_HISTORY_LENGTH, state_size=retecs.DEFAULT_STATE_SIZE, action_size=1, hidden_size=retecs.DEFAULT_NO_HIDDEN_NODES), 
+                 retecs.preprocess_continuous, reward.tcfail)
     ]
 
     for i, get_agent in enumerate(ags):
@@ -63,24 +62,22 @@ def exp_run_industrial_datasets(iteration, datasets, ScenarioType, cols_essentia
             for (reward_name, reward_fun) in reward_funs.items():
 
                 agent, preprocessor, _ = get_agent()
-                data_name = sc.split('_SEP_')[0]
-                data_folder = INPUT_PATH + sc.split('_SEP_')[-1]
-                file_appendix = 'rq_%s_%s_%s_%d' % (agent.name, data_name, reward_name, iteration)
+                file_appendix = 'rq_%s_%s_%s_%d' % (agent.name, sc, reward_name, iteration)
 
-                scenario = scenarios.IndustrialDatasetScenarioProvider(f'{INPUT_PATH}/{data_name}.csv', scenarioType=ScenarioType, cols=cols_essential)
+                scenario = scenarios.IndustrialDatasetScenarioProvider(f'{INPUT_PATH}/{sc}.csv', scenarioType=ScenarioType)
 
                 output_path = f'{OUTPUT_PATH}/{sc}_{ScenarioType}/'
                 Path(output_path).mkdir(parents=True, exist_ok=True)
 
-                rl_learning = l7.PrioLearning(agent=agent,
-                                              scenario_provider=scenario,
-                                              reward_function=reward_fun,
-                                              preprocess_function=preprocessor,
-                                              file_prefix=file_appendix,
-                                              dump_interval=100,
-                                              validation_interval=0,
-                                              output_dir=output_path, 
-                                              scenarioType=ScenarioType)
+                rl_learning = retecs.PrioLearning(agent=agent,
+                                                  scenario_provider=scenario,
+                                                  reward_function=reward_fun,
+                                                  preprocess_function=preprocessor,
+                                                  file_prefix=file_appendix,
+                                                  dump_interval=100,
+                                                  validation_interval=0,
+                                                  output_dir=output_path, 
+                                                  scenarioType=ScenarioType)
 
                 res = rl_learning.train(no_scenarios=CI_CYCLES,
                                         print_log=False,
@@ -91,6 +88,5 @@ def exp_run_industrial_datasets(iteration, datasets, ScenarioType, cols_essentia
 if __name__ == '__main__':
 
     for sc in SCENARIOS_TYPES:
-        
         if RUN_EXPERIMENT:
-            run_experiments(exp_run_industrial_datasets, DATASETS, sc, cols_essential, parallel=True)
+            run_experiments(exp_run_industrial_datasets, DATASETS, sc, parallel=True)
