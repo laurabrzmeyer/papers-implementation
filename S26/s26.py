@@ -97,7 +97,7 @@ class S26():
     '''
     Function to prioritize the tests at the present cycle
     '''
-    def get_prio(self, selection):                       
+    def get_prio(self, selection==None):                       
             
         P = []
 
@@ -113,12 +113,16 @@ class S26():
             self.LastPrio[tc] = P_tc
 
         df = pd.DataFrame({'Test':self.INP.tc_availables, 'Priority':P})
-        self.df_prio = df.copy()[0:selection]
+        
+        # Need to cut if selection != None to calculate self.ExecCounter
+        if(selction!=Non):
+            self.df_prio = df.sort_values(by='Priority', ascending=False).copy()[0:selection]
+        else:
+            self.df_prio = df.copy()
         
         for index, row in self.df_prio.iterrows():
             tc = row['Test']
             self.ExecCounter[tc] = self.ExecCounter[tc] + 1
-
 
         df = df.sample(frac=1).reset_index(drop=True)
         order = list(df.sort_values('Priority', ascending=False)['Test'])
