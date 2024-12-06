@@ -164,7 +164,7 @@ class S3():
     '''
     Function to prioritize the tests at the present cycle
     '''
-    def get_prio(self):
+    def get_prio(self, selection=None):
 
         i_len = self.win_size
         j_len = len(self.INP.tc_availables)
