@@ -76,8 +76,7 @@ def exp_run_industrial_datasets(iteration, datasets, ScenarioType):
                                                   file_prefix=file_appendix,
                                                   dump_interval=100,
                                                   validation_interval=0,
-                                                  output_dir=output_path, 
-                                                  scenarioType=ScenarioType)
+                                                  output_dir=output_path)
 
                 res = rl_learning.train(no_scenarios=CI_CYCLES,
                                         print_log=False,
