@@ -26,7 +26,7 @@ However, execution time is also a crucial factor in test prioritization.
 Tests are first grouped by their *HistValue*, with each group assigned an integer label. 
 The group with the lowest *HistValue* is labeled *1*, the next lowest is labeled *2*, and so on. 
 Thus, if a test *tc* is situated within the third group, then *group(tc,c)=3*. 
-Given a time budget *T<sup>max</sup>*, the execution time of each test *Te*, and the total number of groups *n*, the priority of a test can be calculated using the following equation:
+Given a time budget *T<sub>max</sub>*, the execution time of each test *Te*, and the total number of groups *n*, the priority of a test can be calculated using the following equation:
 
 > <img width="300" alt="image" src="https://github.com/user-attachments/assets/c7ffa9b3-d223-4fb5-9bac-3a80f3ca0e98">
 
