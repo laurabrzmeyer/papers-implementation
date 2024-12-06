@@ -2,6 +2,7 @@
 TOPSIS METHOD
 
 Implementation by Maria Laura Brzezinski Meyer
+Last modification: 06-12-2024
 
 References:
 
@@ -251,8 +252,10 @@ class S22():
     '''
     Function to prioritize the tests at the present cycle
     '''
-    def get_prio(self, cycle):
+    def get_prio(self):
 
+        cycle = self.INP.cycle
+        
         # Get Decision Matrix from cycle
         DM = self.get_decision_matrix(cycle)
 
@@ -294,6 +297,7 @@ class S22():
             P.append(CC)
 
         df = pd.DataFrame({'Test':self.INP.tc_availables, 'Priority':P})
+        
         self.df_prio = df.copy()
 
         df = df.sample(frac=1).reset_index(drop=True)
