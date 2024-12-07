@@ -1,7 +1,7 @@
 """
 RL METHOD
 * This script was adapted from Helge Spieker's run_experiment_common.py code 
-* Accessed in 2022
+* Accessed in March 2023
 * Available at: https://bitbucket.org/HelgeS/retecs/src/master/run_experiment_common.py
 
 Implementation by Maria Laura Brzezinski Meyer
@@ -93,7 +93,7 @@ def exp_run_industrial_datasets(iteration, datasets, ScenarioType, reward_names)
     for i, get_agent in enumerate(ags):
         for sc in datasets:
             for r in reward_names:
-                
+
                 reward_fun = reward_funs[r]
                 agent, preprocessor, _ = get_agent()
                 file_appendix = 'rq_%s_%s_%s_%d' % (agent.name, sc, r, iteration)

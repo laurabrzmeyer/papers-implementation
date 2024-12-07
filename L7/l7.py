@@ -1,7 +1,7 @@
 """
 RETECS METHOD
 * This script was adapted from Helge Spieker's retecs.py code 
-* Accessed in 2022
+* Accessed in March 2023
 * Available at: https://bitbucket.org/HelgeS/retecs/src/master/retecs.py
 
 Implementation by Maria Laura Brzezinski Meyer

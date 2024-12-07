@@ -8,6 +8,7 @@ Welcome! This is the implementation of the **RL** method.
 
 ## Based on RETECS' original code
 
+- Based on the version available in March 2023
 - [ ] [RETECS](https://bitbucket.org/HelgeS/retecs/src/master/)
 
 ## RL Description

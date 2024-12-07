@@ -1,7 +1,7 @@
 """
 RETECS METHOD
 * This script was adapted from Helge Spieker's rewards.py code 
-* Accessed in 2022
+* Accessed in March 2023
 * Available at: https://bitbucket.org/HelgeS/retecs/src/master/rewards.py
 
 Implementation by Maria Laura Brzezinski Meyer

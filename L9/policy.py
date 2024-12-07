@@ -1,3 +1,18 @@
+"""
+COLEMAN
+
+Implementation by Maria Laura Brzezinski Meyer
+Last modification: 06-12-2024
+
+References:
+    J. A. P. Lima and S. R. Vergilio, 
+    "A Multi-Armed Bandit Approach for Test Case Prioritization in Continuous Integration Environments,"
+    in IEEE Transactions on Software Engineering, vol. 48, no. 2, pp. 453-465, 1 Feb. 2022, 
+    doi: 10.1109/TSE.2020.2992428. 
+    Available at: https://ieeexplore.ieee.org/document/9086053
+    
+"""
+
 import random
 import pandas as pd
 import numpy as np

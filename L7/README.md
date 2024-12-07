@@ -8,6 +8,7 @@ Welcome! This is the implementation of the **RETECS** method.
 
 ## Original code
 
+- Based on the version available in March 2023
 - [ ] [RETECS](https://bitbucket.org/HelgeS/retecs/src/master/)
 
 ## RETECS Description

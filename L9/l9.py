@@ -13,7 +13,10 @@ References:
     
 """
 
-from memory import MomentaryMemory, CumulativeMemory, SumMemory, MemoryExperiment
+import random
+import pandas as pd
+
+from memory import MomentaryMemory, CumulativeMemory, SumMemory
 from policy import EpsilonGreedy, UCB, FRRMAB
 from reward import RNFailReward, TimeRankReward
 
@@ -94,7 +97,7 @@ class L9():
     tcs_ordered : list
         list of tests' ids ordered by their priorities
     """
-   def get_prio(self, selection=None):
+    def get_prio(self, selection=None):
 
         cycle = self.INP.in_cycle
         tc_available = self.INP.tc_available
@@ -116,4 +119,4 @@ class L9():
         self.policy.observe(self.momen_memory, actions, rewards)
         self.policy.credit_assignment(self.momen_memory, self.cumul_memory, self.sum_memory)
 
-        return order
+        return sel_list
