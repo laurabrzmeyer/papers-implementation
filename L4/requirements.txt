@@ -1,0 +1,9 @@
+importlib-metadata==1.7.0
+tensorflow==2.1.0
+numpy
+matplotlib
+seaborn
+pandas
+Keras==2.3.1
+SMOGN
+scikit-learn

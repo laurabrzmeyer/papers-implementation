@@ -17,16 +17,16 @@ OUTPUT_PATH = 'Path/To/Save/Outputs/'
 WIN = {'S3':3, 'S22':5, 'S26':5, 'S34':10}
 PARALLEL_POOL_SIZE = 8  # for 2 datasets and 4 methods
 PARALLEL = True
-METHOD = ['S3', 'S22', 'S26', 'S34']
+METHODS = ['S3', 'S22', 'S26', 'S34']
 VARIANTS = {'S3':['S3.1.1', 'S3.1.2', 'S3.2.1', 'S3.2.2'], 'S22':['S22.1', 'S22.2'], 
             'S26':['S26.1.1', 'S26.1.2', 'S26.2.1', 'S26.2.2'], 'S34':['S34.1.1', 'S34.1.2', 'S34.2.1', 'S34.2.2']}
 
 
 def run_experiment(INTERACTIONS, INPUT_PATH, OUTPUT_PATH, input_file, WIN, method, variants, budget=1.0):
   
-    print(f'{INTERACTIONS} experiments for : {directory} using {method} {variants} ...')
+    print(f'{INTERACTIONS} experiments for : {input_file} using {method} {variants} ...')
 
-    path = os.path.join(OUTPUT_PATH, directory) 
+    path = os.path.join(OUTPUT_PATH, input_file) 
     Path(path).mkdir(parents=True, exist_ok=True) 
 
     data_input = pd.read_csv(f'{INPUT_PATH}/{input_file}.csv', sep=';', dtype={'Cycle':int, 'Version':str, 'Test':str, 'Result':int})

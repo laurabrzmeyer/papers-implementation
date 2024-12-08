@@ -1,5 +1,8 @@
 """
-COLEMAN
+COLEMAN METHOD
+* This script is an adaptation of Jackson A. P. Lima's coleman4hcs code 
+* Accessed in December 2022
+* Available at: https://github.com/jacksonpradolima/coleman4hcs
 
 Implementation by Maria Laura Brzezinski Meyer
 Last modification: 06-12-2024
