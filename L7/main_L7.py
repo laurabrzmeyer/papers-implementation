@@ -23,7 +23,7 @@ import agents, rewards, scenarios, l7
 ITERATIONS = 30
 CI_CYCLES = 1000
 
-INPUT_PATH = 'Path/To/Input//'
+INPUT_PATH = 'Path/To/Input/'
 OUTPUT_PATH = 'Path/To/Output/'
 PARALLEL = True
 PARALLEL_POOL_SIZE = 5

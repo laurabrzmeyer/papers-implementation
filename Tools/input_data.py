@@ -31,6 +31,13 @@ class input_data():
         return self.cycles[self.in_cycle]
     
     '''
+    Auxiliar function to get version
+    '''
+    def get_current_version(self):
+        v = self.present['Version'].unique()
+        return list(v)[0]
+    
+    '''
     Auxiliar function to set the Result of not selected tests as not executed in case of selection
     '''
     def update_past(self, selection):

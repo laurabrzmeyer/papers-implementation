@@ -54,7 +54,7 @@ def run_experiment(INTERACTIONS, INPUT_PATH, OUTPUT_PATH, input_file, WIN, metho
 
         for c in cycles:
 
-            version_c = INP.version
+            version_c = INP.get_current_version()
             present = INP.present
             tc_availables = INP.tc_availables
             if(budget==1.0):
