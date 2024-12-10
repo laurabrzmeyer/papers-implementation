@@ -45,7 +45,7 @@ The third reward, *Time-Ranked Reward* (***TRR***), considers the order of each 
 
 To evaluate our first objective (decrease time for fault detection), we prioritize the tests, so all available tests (*T<sub>c</sub>*) will be present in *TS<sub>c</sub>*. 
 It means that the reward ***FailCount*** will always be equal to the number of failed tests and ***TCFail*** will always be the test results. 
-Since the ***TCFail** reward had the best performance for H. Spieker et al. (2017) and, knowing that its effect would be impacted because there is no selection of tests (only prioritization), we propose a modification. 
+Since the ***TCFail*** reward had the best performance for H. Spieker et al. (2017) and, knowing that its effect would be impacted because there is no selection of tests (only prioritization), we propose a modification. 
 Both rewards are given only for the top 40\% tests of *TS<sub>c</sub>*. The reward is zero for the remaining tests. We carried out experiments to validate that this modification does not deteriorate the performance of ***RETECS***. 
 The six variations resulting from the combination of agents (***Tableau*** and ***ANN***) and rewards (***FailCount***, ***TCFail*** and ***TRR***) are shown in the followngi table:
 
