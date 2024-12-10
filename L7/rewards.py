@@ -25,6 +25,7 @@ def failcount(result, sc=None):
 
     if(len(result[8])>0):
         rank_04 = np.array(result[8])-1
+        # Gives a reward only for the tests in the first 40% of the test set
         rewards[rank_04] = result[0]    
 
     ordered_rewards = []
@@ -75,6 +76,7 @@ def tcfail(result, sc):
 
     rewards = np.zeros(no_scheduled)
     for i in rank_idx:
+        # Gives a reward only for the tests in the first 40% of the test set
         if(i in rank_04):
             rewards[i] = 1
 
