@@ -1,4 +1,4 @@
-[<img src="https://github.com/laurabrzmeyer/attachements/blob/main/article.png" height="30">]("add_targeting_to_the_article_latter") [<img src="https://github.com/laurabrzmeyer/attachements/blob/main/library.png" height="30">](https://www.zotero.org/groups/5800690/rt_methods/library) [<img src="https://github.com/laurabrzmeyer/attachements/blob/main/contact.png" height="30">](mailto:laurabrzmeyer@gmail.com)
+[<img src="https://github.com/laurabrzmeyer/attachements/blob/main/article.png" height="40">]("add_targeting_to_the_article_latter") [<img src="https://github.com/laurabrzmeyer/attachements/blob/main/paper.png" height="40">](https://ieeexplore.ieee.org/document/10366626) [<img src="https://github.com/laurabrzmeyer/attachements/blob/main/library.png" height="40">](https://www.zotero.org/groups/5800690/rt_methods/library) [<img src="https://github.com/laurabrzmeyer/attachements/blob/main/contact.png" height="40">](mailto:laurabrzmeyer@gmail.com)
 
 # RT Papers' Implementation
 
@@ -23,6 +23,15 @@ This repository was created as a supplement to the article entitled *"Finding th
 </a>
 
 ## Requirements
+- [python](https://www.python.org/downloads/) $\geq$ 3.9
+- [pandas](https://pandas.pydata.org/docs/index.html) 
+- [numpy](https://numpy.org/)
+- [matplotlib](https://matplotlib.org/)
+- [seaborn](https://seaborn.pydata.org/)
+- [plotly](https://plotly.com/)
+- [tensorflow](https://www.tensorflow.org/) == 2.1.0 (for L4)
+- [scikit-learn](https://scikit-learn.org/stable/)
+- [keras](https://keras.io/) == 2.3.1 (for L4)
 
 ## Dataset
 
