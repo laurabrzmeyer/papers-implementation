@@ -35,7 +35,12 @@ This repository was created as a supplement to the article entitled *"Finding th
 - [PyQt5](https://www.riverbankcomputing.com/software/pyqt/) (for L7 and L8)
 
 ## Dataset
-Each row of the dataset used as input represents the execution of a test case for validation of a specific version of the SUT. We use a CSV file with semicolon (";") as a separator. Pandas will transform it into a dataframe. See below the description of each column:
+Each row of the dataset used as input represents the execution of a test case for validation of a specific version of the SUT. We use a CSV file with semicolon (';') as a separator, like:
+```python 
+import pandas as pd
+my_dataframe = pd.read_csv('file_name.csv', sep=';', dtype={'col1':int, 'col2':str})
+```
+Pandas will transform it into a dataframe. See below the description of each column:
 | Columns | Type | Description | Specification |
 | ------------- | ------------- | ------------- | ------------- |
 | Cycle  | integer  | Number to order the SUT's versions | Used for experiments in ascending order |
@@ -45,6 +50,8 @@ Each row of the dataset used as input represents the execution of a test case fo
 | Duration | integer | Execution duration |  |
 | RunDate | datetime | Date of execution | It can be a string (format='%Y-%m-%d %H:%M:%S') |
 | Bugs | list of strings | List of bugs founded in the execution | It is mantory if the *Issue* scenario is used |
+
+*️⃣ The *input_data* class is responsable to manage data for experiments of S3, S22, S26, S34, and L9 methods.
 
 #### Columns for criteria of S22 used by us:
 | Columns | Type | Description | Specification |
