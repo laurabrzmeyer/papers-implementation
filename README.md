@@ -1,4 +1,4 @@
-[<img src="https://github.com/laurabrzmeyer/attachements/blob/main/contact.png" width="120">]("mailto:laurabrzmeyer@gmail.com") [<img src="https://github.com/laurabrzmeyer/attachements/blob/main/library.png" width="110">]("https://www.zotero.org/groups/5800690/rt_methods/library")
+[<img src="https://github.com/laurabrzmeyer/attachements/blob/main/contact.png" width="120">](mailto:laurabrzmeyer@gmail.com) [<img src="https://github.com/laurabrzmeyer/attachements/blob/main/library.png" width="110">](https://www.zotero.org/groups/5800690/rt_methods/library)
 
 # RT Papers' Implementation
 
