@@ -145,12 +145,12 @@ class S3():
     """ 
     def add_time(self, df, present):
         if(self.tmax==None):
-            self.tmax = sum(present['TE'])
+            self.tmax = sum(present['Duration'])
         P = []
         for index, row in df.iterrows():
             tc = row['Test']
             p = row['Prio_Class']
-            duration = list(present[present['Test']==tc]['TE'])[0]
+            duration = list(present[present['Test']==tc]['Duration'])[0]
             if(duration>self.tmax):
                 t = max(df['Prio_Class'])
                 p_new = t + 1
