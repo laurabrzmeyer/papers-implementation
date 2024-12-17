@@ -243,7 +243,7 @@ class IndustrialDatasetScenarioProvider(RandomScenarioProvider):
     """
     Scenario provider to process CSV files for experimental evaluation of RETECS.
 
-    Required columns are `self.tc_fieldnames` plus ['LabelType', 'Cycle']
+    Required columns are `self.tc_fieldnames` plus ['Cycle']
     """
     def __init__(self, tcfile, scenarioType, sched_time_ratio=1.0):
         super(IndustrialDatasetScenarioProvider, self).__init__()
