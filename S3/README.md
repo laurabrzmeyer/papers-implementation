@@ -48,7 +48,15 @@ The following table shows the specifications of the four variants created by com
 
 > <img width="269" alt="image" src="https://github.com/user-attachments/assets/8b056797-b551-4176-9385-609f4de21cdd">
 
-- References:
+## S3 Class
+| Parameter | Type | Description | Specification |
+| ------------- | ------------- | ------------- | ------------- |
+| variant_name  | string  | Name of the variant | Predifined ones: S3.1.1, S3.1.2, S3.2.1, and S3.2.2 |
+| win_size  | int  | Number of cycles to limit history | Default  is 3 | 
+| INP  | input_data()  | To manage history data | Object from input_data class |
+| specification  | dictionary  | Dictionary to specify S3 parameters | {'weights':list of float, 'tmax':float} |
+
+## References:
     * D. Marijan, A. Gotlieb and S. Sen, 
     *"Test Case Prioritization for Continuous Regression Testing: An Industrial Case Study,"*
     2013 IEEE International Conference on Software Maintenance, Eindhoven, Netherlands, 2013, pp. 540-543, 
