@@ -1,4 +1,4 @@
-[<img src="https://github.com/laurabrzmeyer/attachements/blob/main/contact.png" width="120">](mailto:laurabrzmeyer@gmail.com) [<img src="https://github.com/laurabrzmeyer/attachements/blob/main/library.png" width="110">](https://www.zotero.org/groups/5800690/rt_methods/library)
+[<img src="https://github.com/laurabrzmeyer/attachements/blob/main/article.png" height="30">]("add_targeting_to_the_article_latter") [<img src="https://github.com/laurabrzmeyer/attachements/blob/main/library.png" height="30">](https://www.zotero.org/groups/5800690/rt_methods/library) [<img src="https://github.com/laurabrzmeyer/attachements/blob/main/contact.png" height="30">](mailto:laurabrzmeyer@gmail.com)
 
 # RT Papers' Implementation
 
@@ -12,13 +12,13 @@ This repository was created as a supplement to the article entitled *"Finding th
 - [Contributors](#contributors)
 - [Requirements](#requirements)
 - [Dataset](#dataset)
-- [Methods Si](#methods_si)
-- [Methods Li](#methods_li)
+- [Methods Si](#methods-si)
+- [Methods Li](#methods-li)
 - [Evaluation](#evaluation)
 
 ## Contributors
 - :computer: Maria Laura Brzezinski Meyer
-<a href="https://github.com/jacksonpradolima/coleman4hcs/graphs/contributors">
+<a href="https://github.com/laurabrzmeyer/papers-implementation/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=laurabrzmeyer/papers-implementation" />
 </a>
 
