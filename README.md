@@ -12,8 +12,7 @@ This repository was created as a supplement to the article entitled *"Finding th
 - [Contributors](#contributors)
 - [Requirements](#requirements)
 - [Dataset](#dataset)
-- [Methods Si](#methods-si)
-- [Methods Li](#methods-li)
+- [Execution of Methods](#execution-of-methods)
 - [Evaluation](#evaluation)
 
 ## Contributors
@@ -30,13 +29,66 @@ This repository was created as a supplement to the article entitled *"Finding th
 - [seaborn](https://seaborn.pydata.org/)
 - [plotly](https://plotly.com/)
 - [tensorflow](https://www.tensorflow.org/) == 2.1.0 (for L4)
-- [scikit-learn](https://scikit-learn.org/stable/)
-- [keras](https://keras.io/) == 2.3.1 (for L4)
+- [Keras](https://keras.io/) == 2.3.1 (for L4)
+- [scikit-learn](https://scikit-learn.org/stable/) == 0.19.1 (for L7 and L8)
+- [scipy](https://scipy.org/) == 1.4.1 (for L7 and L8)
+- [PyQt5](https://www.riverbankcomputing.com/software/pyqt/) (for L7 and L8)
 
 ## Dataset
+Each row of the dataset used as input represents the execution of a test case for validation of a specific version of the SUT. We use a CSV file with semicolon (";") as a separator. Pandas will transform it into a dataframe. See below the description of each column:
+| Columns | Type | Description | Specification |
+| ------------- | ------------- | ------------- | ------------- |
+| Cycle  | integer  | Number to order the SUT's versions | Used for experiments in ascending order |
+| Version  | string  | The SUT's version | It is not mandatory | 
+| Test  | string  | Test case identifier/name | Needs to be unique |
+| Result  | string  | The result of the test's execution | Pass=0; Fail=1; NotExecuted=-1 |
+| Duration | integer | Execution duration |  |
+| RunDate | datetime | Date of execution | It can be a string (format='%Y-%m-%d %H:%M:%S') |
+| Bugs | list of strings | List of bugs founded in the execution | It is mantory if the *Issue* scenario is used |
 
-## Methods Si
+#### Columns for criteria of S22 used by us:
+| Columns | Type | Description | Specification |
+| ------------- | ------------- | ------------- | ------------- |
+| FailProb  | float  | Probability of test failure | It is created by the script using 'Result' |
+| ExecTime  | string  | The SUT's version | It is created by the script using 'Duration' | 
+| ReqCov  | integer  | Number of requirements covered by the test | Need to be provided |
+| TestCost | integer/float | Value to represent the test's cost | Need to be provided, we use the number of enablers required to execute the test |
 
-## Methods Li
+#### Columns required by S26.2.* variants:
+| Columns | Type | Description | Specification |
+| ------------- | ------------- | ------------- | ------------- |
+| StaticPrio  | float  | Static priority of the test | We use 3 levels of priority: 1, 2, and 3 |
+| TestAge  | float  | The age of the test case | It can be calculated using the creation date of tests | 
+
+#### Columns required by S34.2.* variants:
+| Columns | Type | Description | Specification |
+| ------------- | ------------- | ------------- | ------------- |
+| Smoke  | boolean  | Used to distinguish the "smoke" tests subset | True or False |
+
+#### Columns for L4 (managed by the function 'contruction_inputDL_asCases(data_path)'):
+| Columns | Type | Description | Specification |
+| ------------- | ------------- | ------------- | ------------- |
+| Week  | datetime  | To separate runs into groups | It is created by the script using 'Cycle', but can be replaced by 'RunDate' |
+| DurationFeature  | float  | It is the "Duration" normalized | It is created by the script using 'Duration' | 
+| EX  | integer  | It is the "Result" of cycle c-X | It is created by the script using 'Result' (Pass=0;Fail=1;NotExecuted=-1) |
+| EX_rocket  | integer  | It is the "Result" of cycle c-1 | It is created by the script using 'EX' (Pass=1;Fail=-1;NotExecuted=0) |
+| LastRunFeature  | float  | It is the time since last execution | It is created by the script using 'Week' |
+| DIST | integer | Distance from last fail | It is calculated by the script and can be 0 (if E1=1 and E2=E3=0), 1 (if E1=E3=0 and E2=1), or 2 (if E1=E2=0 and E3=1) |
+| CHANGE_IN_STATUS  | integer  | Number of time the 'Result' changed | It is created by the script using 'EX' |
+| PRIORITY_VALUE  | float  | It is the priority of a test according to ROCKET | It is created by the script using 'EX_rocket' |
+
+#### Columns for L7/L8 (managed by the class 'IndustrialDatasetScenarioProvider'):
+| Columns | Type | Description | Specification |
+| ------------- | ------------- | ------------- | ------------- |
+| ID  | integer  | An identifier unique for the run | - |
+| CalcPrio  | float  | Priority of the test | Initialized as zero | 
+| LastRun  | datetime  | It is the date of last execution | - |
+| LR  | list of integers  | List of last results | It need to be ordered from the most to the last recent |
+
+## Execution of Methods 
+
+### Si
+
+### Li
 
 ## Evaluation
