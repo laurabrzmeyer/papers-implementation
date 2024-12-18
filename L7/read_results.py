@@ -46,17 +46,17 @@ def get_graal(df_data, ITERATIONS, folder_name):
     df = retecs[['Experiment', 'Cycle', 'Version', 'APFD', 'Order', 'Method']]
     df.to_csv(folder_name+'/L7_Graal'+str(ITERATIONS)+'.csv', sep=';', index=False)
 
-def read_results(ITERATIONS, DATASETS, LabelType, path_input): 
+def read_results(ITERATIONS, DATASETS, LabelType, path_input, path_to_save): 
     for dataset in DATASETS:
-        output_path = f'{DATA_DIR}/{LabelType}_{dataset}/'
+        raw_output_path = f'{DATA_DIR}/{LabelType}_{dataset}/'
         search_pattern = 'rq_*_stats.p'
         filename = 'rq'
-        iteration_results = glob.glob(os.path.join(output_path, search_pattern))
-        aggregated_results = os.path.join(output_path, filename)
+        iteration_results = glob.glob(os.path.join(raw_output_path, search_pattern))
+        aggregated_results = os.path.join(raw_output_path, filename)
         df_init = stats.load_stats_dataframe(iteration_results, aggregated_results)
         df_init.loc[(df_init['detected'] + df_init['missed']) == 0, 'napfd'] = np.nan
         map_cv, df_data = map_versions_steps(dataset, df_init, path_input)
-        get_graal(df_data, ITERATIONS, output_path)
+        get_graal(df_data, ITERATIONS, path_to_save)
 
 def compare_rewards(df_init_pure, method_, path_to_save):
     cycles = list(df_init_pure['step'].unique())
