@@ -31,15 +31,19 @@ from L8 import rewards
 sys.path.insert(0, 'papers-implementation/L7')
 
 ITERATIONS = 30
-CI_CYCLES = 1000
-
+DATASETS = ['Dataset1', 'Dataset2']
 INPUT_PATH = 'Path/To/Input//'
 OUTPUT_PATH = 'Path/To/Output/'
 PARALLEL = True
 PARALLEL_POOL_SIZE = 5
-RUN_EXPERIMENT = True
-DATASETS = ['Dataset1', 'Dataset2']
 SCENARIOS_TYPES = ['Verdict', 'Issue']
+REWARDS = ['rhe_whole_four', 'rhe_whole_all', 'rhe_part_four', 'rhe_part_all', 'the_whole_four', 'the_part_four']
+env_names = {
+    'dataset1': 'Dataset 1',
+    'dataset2': 'Dataset 2'
+}
+
+CI_CYCLES = 1000
 
 method_names = {
     'mlpclassifier': 'Network',
@@ -65,11 +69,6 @@ reward_funs = {
     'rhe_part_four': rewards.Reward('rhe_part_four'),
     'the_whole_four': rewards.Reward('the_whole_four'),
     'the_part_four': rewards.Reward('the_part_four')
-}
-
-env_names = {
-    'dataset1': 'Dataset 1',
-    'dataset2': 'Dataset 2'
 }
 
 def run_experiments(exp_fun, dataset, ScenarioType, reward_names, N_INT, parallel=PARALLEL):
@@ -120,8 +119,6 @@ def exp_run_industrial_datasets(iteration, datasets, ScenarioType, reward_names)
                 
 if __name__ == '__main__':
 
-    REWARDS = ['rhe_whole_four', 'rhe_whole_all', 'rhe_part_four', 'rhe_part_all', 'the_whole_four', 'the_part_four']
-
     for sc in SCENARIOS_TYPES:
         for d in DATASETS:
-            run_experiments(exp_run_industrial_datasets, d, sc, REWARDS, ITERATIONS, parallel=True)
+            run_experiments(exp_run_industrial_datasets, d, sc, REWARDS, ITERATIONS, parallel=PARALLEL)
