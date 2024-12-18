@@ -53,6 +53,13 @@ The characteristics of the two **S22** varieties are summarized in the table bel
 
 > <img width="300" alt="image" src="https://github.com/user-attachments/assets/d080b970-f990-4948-b5f0-8ab406db62b7">
 
+## S22 Class
+| Parameter | Type | Description | Specification |
+| ------------- | ------------- | ------------- | ------------- |
+| variant_name  | string  | Name of the variant | Predifined ones: S22.1, S22.2 |
+| win_size  | int  | Number of cycles to limit history | Default  is 5 | 
+| INP  | input_data()  | To manage history data | Object from input_data class |
+| specification  | dictionary | Dictionary to specify S22 parameters | ``` {criteria_name:(criteria_benefit, criteria_weight)} ```, where *criteria_name* is a string, *criteria_benefit* is a boolean, and *criteria_weight* is a float |
 
 - References:
     * Y.-J. Lai, T.-Y. Liu, and C.-L. Hwang, *"TOPSIS for MODM,"* European Journal of Operational Research, Volume 76, Issue 3, 1994, Pages 486-500, ISSN 0377-2217, doi: 10.1016/0377-2217(94)90282-8.
