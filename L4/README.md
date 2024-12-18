@@ -39,12 +39,18 @@ Thus, we present two variants: *L4.1* considering the three last executions (*Ca
 
 > <img width="300" alt="image" src="https://github.com/user-attachments/assets/5dfc603b-06a1-42d3-b63f-491ba35f3117">
 
-- References:
-    * A. Sharif, D. Marijan, and M. Liaaen, *"DeepOrder: Deep Learning for Test Case Prioritization in Continuous Integration Testing,"* 2021 IEEE Int. Conf. on Software Maintenance and Evolution (ICSME), pp. 525–534.
-    * [DeepOrder paper](https://arxiv.org/abs/2110.07443)
+## L4 Class
+| Parameter | Type | Description | Specification |
+| ------------- | ------------- | ------------- | ------------- |
+| variant_name  | string  | Name of the variant | Predifined ones: L4.1, and L4.2 |
+| INP  | input_data()  | To manage history data | Object from input_data class |
+
+## References:
+- A. Sharif, D. Marijan, and M. Liaaen, *"DeepOrder: Deep Learning for Test Case Prioritization in Continuous Integration Testing,"* 2021 IEEE Int. Conf. on Software Maintenance and Evolution (ICSME), pp. 525–534.
+ℹ️ [DeepOrder paper](https://arxiv.org/abs/2110.07443)
       
-    * D. Misra, *"Mish: A Self Regularized Non-Monotonic Activation Function,"* arXiv preprint arXiv:1908.08681, 2020.
-    * [Mish paper](https://arxiv.org/abs/1908.08681)
+- D. Misra, *"Mish: A Self Regularized Non-Monotonic Activation Function,"* arXiv preprint arXiv:1908.08681, 2020.
+ℹ️ [Mish paper](https://arxiv.org/abs/1908.08681)
     
-    * S. Ruder, *"An overview of gradient descent optimization algorithms,"* arXiv preprint arXiv:1609.04747, 2017.
-    * [Gradient Descent paper](https://arxiv.org/abs/1609.04747)
+- S. Ruder, *"An overview of gradient descent optimization algorithms,"* arXiv preprint arXiv:1609.04747, 2017.
+ℹ️ [Gradient Descent paper](https://arxiv.org/abs/1609.04747)
