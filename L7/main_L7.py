@@ -35,6 +35,7 @@ env_names = {
 }
 
 CI_CYCLES = 1000
+DATA_DIR = 'L7_Raw_Outputs/'
 
 method_names = {
     'mlpclassifier': 'Network',
@@ -82,8 +83,8 @@ def exp_run_industrial_datasets(iteration, datasets, ScenarioType):
                 file_appendix = 'rq_%s_%s_%s_%d' % (agent.name, sc, reward_name, iteration)
 
                 scenario = scenarios.IndustrialDatasetScenarioProvider(f'{INPUT_PATH}/{sc}.csv', scenarioType=ScenarioType)
-
-                output_path = f'{OUTPUT_PATH}/{sc}_{ScenarioType}/'
+                
+                raw_output_path = f'{DATA_DIR}/{ScenarioType}_{sc}/'
                 Path(output_path).mkdir(parents=True, exist_ok=True)
 
                 rl_learning = l7.PrioLearning(agent=agent,
@@ -93,7 +94,7 @@ def exp_run_industrial_datasets(iteration, datasets, ScenarioType):
                                                   file_prefix=file_appendix,
                                                   dump_interval=100,
                                                   validation_interval=0,
-                                                  output_dir=output_path)
+                                                  output_dir=raw_output_path)
 
                 res = rl_learning.train(no_scenarios=CI_CYCLES,
                                         print_log=False,
