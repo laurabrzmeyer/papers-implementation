@@ -27,7 +27,8 @@ In the ***UCB*** policy, the same quality estimator $\hat{q}$<sub>i,t</sub> is u
 
 Two reward functions are used. The first one is based on the result of the test, that is, *1* if the test fails and *0* otherwise. It is similar to ***TCFail*** from **L7**, it is designate as ***Reward Based on Failures*** (***RNFail***). The second is the ***Time-Ranked*** reward (***TRR***, the same as described for **L7**) and it verifies the rank of failing tests. If a test case that passes is ranked in the first position before the failing tests, the agent is penalized. The algorithm is available online. Further information regarding the **COLEMAN** method can be found in J. A. P. Lima (2021). The following table shows the 6 agents resulting from the combination of the three policies and the two rewards presented above.
 
-> 
+> <img width="420" alt="image" src="https://github.com/user-attachments/assets/5bdbae2e-d8d9-4833-9cf5-9df3df854ae1">
+
 
 ## L9 Class
 | Parameter | Type | Description | Specification |
