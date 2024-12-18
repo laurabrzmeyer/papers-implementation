@@ -4,6 +4,7 @@ math
 plotly
 seaborn
 matplotlib
+mlxtend
 keras
 tensorflow
 scikit-learn
