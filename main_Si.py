@@ -10,21 +10,21 @@ from S22.s22 import S22
 from S26.s26 import S26
 from S34.s34 import S34
 
-INTERACTIONS = 30
+ITERATIONS = 30
 DATASETS = ['Dataset1', 'Dataset2']
 INPUT_PATH = 'Path/To/Input/'
 OUTPUT_PATH = 'Path/To/Save/Outputs/'
-WIN = {'S3':3, 'S22':5, 'S26':5, 'S34':10}
-PARALLEL_POOL_SIZE = 8  # for 2 datasets and 4 methods
-PARALLEL = True
 METHODS = ['S3', 'S22', 'S26', 'S34']
 VARIANTS = {'S3':['S3.1.1', 'S3.1.2', 'S3.2.1', 'S3.2.2'], 'S22':['S22.1', 'S22.2'], 
             'S26':['S26.1.1', 'S26.1.2', 'S26.2.1', 'S26.2.2'], 'S34':['S34.1.1', 'S34.1.2', 'S34.2.1', 'S34.2.2']}
+WIN = {'S3':3, 'S22':5, 'S26':5, 'S34':10}
+BUDGET = 1.0
+PARALLEL = True
+PARALLEL_POOL_SIZE = 8  # for 2 datasets and 4 methods
 
-
-def run_experiment(INTERACTIONS, INPUT_PATH, OUTPUT_PATH, input_file, WIN, method, variants, budget=1.0):
+def run_experiment(ITERATIONS, INPUT_PATH, OUTPUT_PATH, input_file, WIN, method, variants, budget):
   
-    print(f'{INTERACTIONS} experiments for : {input_file} using {method} {variants} ...')
+    print(f'{ITERATIONS} experiments for : {input_file} using {method} {variants} ...')
 
     path = os.path.join(OUTPUT_PATH, input_file) 
     Path(path).mkdir(parents=True, exist_ok=True) 
@@ -41,7 +41,7 @@ def run_experiment(INTERACTIONS, INPUT_PATH, OUTPUT_PATH, input_file, WIN, metho
 
     EXP, VERSIONS, CYCLES = [[] for i in range(3)]
 
-    for exp in range(0,INTERACTIONS):
+    for exp in range(0,ITERATIONS):
       
         cycles = INP.cycles
         interaction = 1
@@ -95,7 +95,7 @@ def run_experiment(INTERACTIONS, INPUT_PATH, OUTPUT_PATH, input_file, WIN, metho
         df['Method'] = n
         concat_df = pd.concat([concat_df, df], ignore_index=True)
 
-    concat_df.to_csv(f'{path}/{method}_Graal{str(INTERACTIONS)}.csv', sep=';', index=False)
+    concat_df.to_csv(f'{path}/{method}_Graal{str(ITERATIONS)}.csv', sep=';', index=False)
     
     print('{} done for {}!'.format(method, input_file))
 
@@ -106,14 +106,14 @@ if __name__ == '__main__':
     items = []
     for d in DATASETS:
       for m in METHODS:
-        items.append((INTERACTIONS, INPUT_PATH, OUTPUT_PATH, d, WIN[m], m, VARIANTS[m]))
+        items.append((ITERATIONS, INPUT_PATH, OUTPUT_PATH, d, WIN[m], m, VARIANTS[m], BUDGET))
 
     if PARALLEL:
       p = multiprocessing.Pool(PARALLEL_POOL_SIZE)
       avg_res = p.starmap(run_experiment, items)
     else:
       for i in items:
-        run_experiment(i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7])
+        run_experiment(i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8])
     
     time_spent = round((time.time()-start_time)/60, 2)
     print('All experiments done in {} minutes!'.format(time_spent))
