@@ -61,14 +61,14 @@ The characteristics of the two **S22** varieties are summarized in the table bel
 | INP  | input_data()  | To manage history data | Object from input_data class |
 | specification  | dictionary | Dictionary to specify S22 parameters | ``` {criteria_name:(criteria_benefit, criteria_weight)} ```, where *criteria_name* is a string, *criteria_benefit* is a boolean, and *criteria_weight* is a float |
 
-- References:
-    * Y.-J. Lai, T.-Y. Liu, and C.-L. Hwang, *"TOPSIS for MODM,"* European Journal of Operational Research, Volume 76, Issue 3, 1994, Pages 486-500, ISSN 0377-2217, doi: 10.1016/0377-2217(94)90282-8.
-    * [TOPSIS paper](https://www.sciencedirect.com/science/article/pii/0377221794902828)
+## References:
+- Y.-J. Lai, T.-Y. Liu, and C.-L. Hwang, *"TOPSIS for MODM,"* European Journal of Operational Research, Volume 76, Issue 3, 1994, Pages 486-500, ISSN 0377-2217, doi: 10.1016/0377-2217(94)90282-8.
+ℹ️ [TOPSIS paper](https://www.sciencedirect.com/science/article/pii/0377221794902828)
       
-    * S. Tahvili, W. Afzal, M. Saadatmand, M. Bohlin, D. Sundmark, and S. Larsson (2016). *"Towards Earlier Fault Detection by Value-Driven Prioritization of Test Cases Using Fuzzy TOPSIS,"* Latifi, S. (eds) Information Technology: New Generations. Advances in Intelligent Systems and Computing, vol 448. Springer, doi: 10.1007/978-3-319-32467-8_65.
-    * [FTOPSIS paper](https://doi.org/10.1007/978-3-319-32467-8_65)
+- S. Tahvili, W. Afzal, M. Saadatmand, M. Bohlin, D. Sundmark, and S. Larsson (2016). *"Towards Earlier Fault Detection by Value-Driven Prioritization of Test Cases Using Fuzzy TOPSIS,"* Latifi, S. (eds) Information Technology: New Generations. Advances in Intelligent Systems and Computing, vol 448. Springer, doi: 10.1007/978-3-319-32467-8_65.
+ℹ️ [FTOPSIS paper](https://doi.org/10.1007/978-3-319-32467-8_65)
       
-    * C.-L. Hwang and K. Yoon (1981). *"Multiple attribute decision making,"* Springer Berlin, Heidelberg, 1 edition.
-    * [Book Multiple Attribute Decision Making](https://link.springer.com/book/10.1007/978-3-642-48318-9)
+- C.-L. Hwang and K. Yoon (1981). *"Multiple attribute decision making,"* Springer Berlin, Heidelberg, 1 edition.
+ℹ️ [Book Multiple Attribute Decision Making](https://link.springer.com/book/10.1007/978-3-642-48318-9)
     
     
