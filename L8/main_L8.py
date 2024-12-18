@@ -71,7 +71,7 @@ reward_funs = {
     'the_part_four': rewards.Reward('the_part_four')
 }
 
-def run_experiments(exp_fun, dataset, ScenarioType, reward_names, N_INT, parallel=PARALLEL):
+def run_experiments(exp_fun, dataset, ScenarioType, reward_names, N_INT, parallel):
     if parallel:
         p = multiprocessing.Pool(PARALLEL_POOL_SIZE)
         items = []
@@ -121,4 +121,4 @@ if __name__ == '__main__':
 
     for sc in SCENARIOS_TYPES:
         for d in DATASETS:
-            run_experiments(exp_run_industrial_datasets, d, sc, REWARDS, ITERATIONS, parallel=PARALLEL)
+            run_experiments(exp_run_industrial_datasets, d, sc, REWARDS, ITERATIONS, PARALLEL)
