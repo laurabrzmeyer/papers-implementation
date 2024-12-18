@@ -85,7 +85,7 @@ def exp_run_industrial_datasets(iteration, datasets, ScenarioType):
                 scenario = scenarios.IndustrialDatasetScenarioProvider(f'{INPUT_PATH}/{sc}.csv', scenarioType=ScenarioType)
                 
                 raw_output_path = f'{DATA_DIR}/{ScenarioType}_{sc}/'
-                Path(output_path).mkdir(parents=True, exist_ok=True)
+                Path(raw_output_path).mkdir(parents=True, exist_ok=True)
 
                 rl_learning = l7.PrioLearning(agent=agent,
                                                   scenario_provider=scenario,
