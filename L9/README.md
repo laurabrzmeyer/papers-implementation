@@ -29,13 +29,21 @@ Two reward functions are used. The first one is based on the result of the test,
 
 > 
 
-- References:
+## L9 Class
+| Parameter | Type | Description | Specification |
+| ------------- | ------------- | ------------- | ------------- |
+| variant_name  | string  | Name of the variant | Predifined ones: L9.1.1, L9.1.2, L9.2.1, L9.2.2, L9.3.1, and L9.3.2 |
+| win_size  | int  | Number of cycles to limit history | Default  is 20 | 
+| INP  | input_data()  | To manage history data | Object from input_data class |
+| policy_settings  | dictionary  | Dictionary to specify policy's parameters | EpsilonGreedy: ``` {'Type':'Egreedy', 'epsilon':float} ``` <br />  UCB: ``` {'Type':'UCB', 'C':float} ``` <br /> FRRMAB: ``` {'Type':'FRRMAB', 'C':float, 'DF':float} ``` |
+| reward_type  | string  | String to specify reward type | Predifined ones: 'RBF' and 'TRR' |
 
-    * J. A. P. Lima and S. R. Vergilio, *"A Multi-Armed Bandit Approach for Test Case Prioritization in Continuous Integration Environments,"* IEEE Transactions on Software Engineering, vol. 48, no. 2, pp. 453-465, 1 Feb. 2022, doi: 10.1109/TSE.2020.2992428. 
-    * [COLEMAN paper](https://ieeexplore.ieee.org/document/9086053)
+## References:
+- J. A. P. Lima and S. R. Vergilio, *"A Multi-Armed Bandit Approach for Test Case Prioritization in Continuous Integration Environments,"* IEEE Transactions on Software Engineering, vol. 48, no. 2, pp. 453-465, 1 Feb. 2022, doi: 10.1109/TSE.2020.2992428.
+ℹ️ [COLEMAN paper](https://ieeexplore.ieee.org/document/9086053)
 
-    * K. Li, Á. Fialho, S. Kwong, and Q. Zhang, *"Adaptive Operator Selection With Bandits for a Multiobjective Evolutionary Algorithm Based on Decomposition,"* IEEE Transactions on Evolutionary Computation, vol. 18, no. 1, pp. 114-130, Feb. 2014, doi: 10.1109/TEVC.2013.2239648.
-    * [FRRMAB paper](https://ieeexplore.ieee.org/document/6410018)
+- K. Li, Á. Fialho, S. Kwong, and Q. Zhang, *"Adaptive Operator Selection With Bandits for a Multiobjective Evolutionary Algorithm Based on Decomposition,"* IEEE Transactions on Evolutionary Computation, vol. 18, no. 1, pp. 114-130, Feb. 2014, doi: 10.1109/TEVC.2013.2239648.
+ℹ️ [FRRMAB paper](https://ieeexplore.ieee.org/document/6410018)
 
-    * J. A. P. Lima, *"A Multi-Armed Bandit Approach for Enhancing Test Case Prioritization in Continuous Integration Environments,"* [Doctoral dissertation, Federal University of Parana] Curitiba, PR, Brazil.
-    * [J. A. P. Lima Doctoral Dissertation](https://acervodigital.ufpr.br/xmlui/handle/1884/73748})
+- J. A. P. Lima, *"A Multi-Armed Bandit Approach for Enhancing Test Case Prioritization in Continuous Integration Environments,"* [Doctoral dissertation, Federal University of Parana] Curitiba, PR, Brazil.
+ℹ️ [J. A. P. Lima Doctoral Dissertation](https://acervodigital.ufpr.br/xmlui/handle/1884/73748})
