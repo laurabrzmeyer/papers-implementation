@@ -25,7 +25,7 @@ References:
 
 import sys, multiprocessing
 from pathlib import Path
-from L7 import agents, scenarios, l7
+from L7 import agents, scenarios, l7, read_results
 from L8 import rewards
 
 sys.path.insert(0, 'papers-implementation/L7')
@@ -44,6 +44,7 @@ env_names = {
 }
 
 CI_CYCLES = 1000
+DATA_DIR = 'L7_Raw_Outputs/'
 
 method_names = {
     'mlpclassifier': 'Network',
@@ -99,8 +100,8 @@ def exp_run_industrial_datasets(iteration, datasets, ScenarioType, reward_names)
 
                 scenario = scenarios.IndustrialDatasetScenarioProvider(f'{INPUT_PATH}/{sc}.csv', scenarioType=ScenarioType)
 
-                output_path = f'{OUTPUT_PATH}/{sc}_{ScenarioType}/'
-                Path(output_path).mkdir(parents=True, exist_ok=True)
+                raw_output_path = f'{DATA_DIR}/{ScenarioType}_{sc}/'
+                Path(raw_output_path).mkdir(parents=True, exist_ok=True)
 
                 rl_learning = l7.PrioLearning(agent=agent,
                                                 scenario_provider=scenario,
@@ -109,7 +110,7 @@ def exp_run_industrial_datasets(iteration, datasets, ScenarioType, reward_names)
                                                 file_prefix=file_appendix,
                                                 dump_interval=100,
                                                 validation_interval=0,
-                                                output_dir=output_path)
+                                                output_dir=raw_output_path)
 
                 res = rl_learning.train(no_scenarios=CI_CYCLES,
                                             print_log=False,
@@ -119,5 +120,7 @@ def exp_run_industrial_datasets(iteration, datasets, ScenarioType, reward_names)
                 
 if __name__ == '__main__':
 
-    for sc in SCENARIOS_TYPES:
-        run_experiments(exp_run_industrial_datasets, DATASETS, sc, REWARDS, ITERATIONS, PARALLEL)
+    for st in SCENARIOS_TYPES:
+        run_experiments(exp_run_industrial_datasets, DATASETS, st, REWARDS, ITERATIONS, PARALLEL)
+        for d in DATASETS:
+            read_results.read_results(ITERATIONS, d, st, INPUT_PATH, OUTPUT_PATH)
