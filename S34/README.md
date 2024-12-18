@@ -38,10 +38,15 @@ So for **S34**, we analyze four heuristic algorithms: *MFF<sub>Full</sub>*, *MFF
 The original paper proposes a selection technique. Some tests are selected if frequently fail or if their association $confidence$ is above a threshold (set to *0.4* in the paper).
 However, we are primarily interested in prioritizing the tests. To be able to compare **S34** with the other methods, the priority value of a test is determined by its failure rate (for **MFF** method) and association *confidence* (for **ARM** method). 
 
-- References:
-    * J. Anderson, S. Salem, and H. Do,
-    *"Improving the effectiveness of test suite through mining historical data,"*
-    2014 11th Working Conf. on Mining Software Repositories (MSR), pp. 142–151, 
-    doi: 10.1145/2597073.2597084.
-    * [MF/ARM paper](https://dl.acm.org/doi/10.1145/2597073.2597084)
+## S34 Class
+| Parameter | Type | Description | Specification |
+| ------------- | ------------- | ------------- | ------------- |
+| variant_name  | string  | Name of the variant | Predifined ones: S34.1.1, S34.1.2, S34.2.1, and S34.2.2 |
+| win_size  | int  | Number of cycles to limit history | Default  is 3 | 
+| INP  | input_data()  | To manage history data | Object from input_data class |
+| specification  | dictionary  | Dictionary to specify S34.2 parameters | ``` {'support':float} ``` |
+
+## References:
+- J. Anderson, S. Salem, and H. Do, *"Improving the effectiveness of test suite through mining historical data,"* 2014 11th Working Conf. on Mining Software Repositories (MSR), pp. 142–151, doi: 10.1145/2597073.2597084.
+ℹ️ [MF/ARM paper](https://dl.acm.org/doi/10.1145/2597073.2597084)
 
