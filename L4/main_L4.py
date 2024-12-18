@@ -34,7 +34,7 @@ import multiprocessing
 from l4 import L4
 from functions import *
 
-ITERACTIONS = 30
+ITERATIONS = 30
 INPUT_PATH = 'Path/To/Input/'
 DATASETS = ['Dataset1', 'Dataset2']
 OUTPUT_PATH = 'Path/To/Save/Outputs/'
@@ -44,7 +44,7 @@ PARALLEL = True
 cols_essential = ['Cycle', 'Version', 'Test', 'Result', 'Bugs', 'Duration', 'DurationFeature', 'E1', 'E2', 'E3', 'LastRunFeature', 'DIST', 'CHANGE_IN_STATUS', 'PRIORITY_VALUE']
 
 
-def run_experiment(data_name, input_path, variant, output_path, cols_essential, ITERACTIONS):
+def run_experiment(data_name, input_path, variant, output_path, cols_essential, ITERATIONS):
 
     print(f'Running L4 method ({variant}) for {d} ...')
 
@@ -53,7 +53,7 @@ def run_experiment(data_name, input_path, variant, output_path, cols_essential, 
 
     Orders, cycles_true, versions, EXP = ([] for len_v in range(4))
 
-    for index_for in range(0,ITERACTIONS):
+    for index_for in range(0,ITERATIONS):
 
         config = tf.compat.v1.ConfigProto()
         config.gpu_options.allow_growth = True
@@ -152,7 +152,7 @@ def run_experiment(data_name, input_path, variant, output_path, cols_essential, 
     # Saving order
     df_graal = pd.DataFrame({'Experiment':EXP, 'Cycle':cycles_true, 'Version':versions, 'Order':Orders})
     df_graal['Method'] = variant
-    df_graal.to_csv(f'{output_path}/L4_Graal{str(ITERACTIONS)}.csv', sep=';', index=False)
+    df_graal.to_csv(f'{output_path}/L4_Graal{str(ITERATIONS)}.csv', sep=';', index=False)
                 
 if __name__ == '__main__':
     
@@ -165,7 +165,7 @@ if __name__ == '__main__':
         out_path = os.path.join(OUTPUT_PATH, d) 
         Path(out_path).mkdir(parents=True, exist_ok=True) 
         for v in VARIANTS:            
-            experiments.append(d, data_path, v, out_path, cols_essential, ITERACTIONS)
+            experiments.append(d, data_path, v, out_path, cols_essential, ITERATIONS)
 
     if PARALLEL:
       p = multiprocessing.Pool(PARALLEL_POOL_SIZE)
