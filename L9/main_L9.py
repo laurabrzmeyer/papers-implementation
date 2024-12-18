@@ -66,7 +66,7 @@ def run_experiment(data_name, input_path, path_output, variant_name, policy, rwd
                        
             INP.next_cycle()
 
-    df = pd.DataFrame({'Experiment':EXP, 'Cycle':CYCLE, 'Version':VERSION, 'Order':ORDER, 'Selection':SELECTION})
+    df = pd.DataFrame({'Experiment':EXP, 'Cycle':CYCLE, 'Version':VERSION, 'Method':variant_name, 'Order':ORDER, 'Selection':SELECTION})
     df['Dataset'] = data_name
     df['Method'] = variant_name
     df.to_csv(f'{path_output}/{variant_name}_Graal30.csv', sep=';', index=False)
