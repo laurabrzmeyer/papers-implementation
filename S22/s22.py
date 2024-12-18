@@ -28,7 +28,7 @@ class S22():
     variant_name = name for variant, to get predifined ones: S22.1 and S22.2
     win_size = size of window in cycles (int value)
     INP = object from input_data class
-    specification = list of tuples following the format (criteria_name:str, criteria_benefit:bool, criteria_weight:float)
+    specification = dictionary following the format {criteria_name:(criteria_benefit, criteria_weight)}, where criteria_name is a string, criteria_benefit is a boolean, and criteria_weight is a float
     '''
     def __init__(self, variant_name, data_input, win_size=1000, specification=None):
         self.variant_name = variant_name
@@ -52,10 +52,10 @@ class S22():
             self.weights = {'FailProb':1.0, 'ExecTime':0.0, 'ReqCov':1.0, 'TestCost':1.0}
         else:
             assert specification!=None, 'The variant provided is not defined yet! The criteria specification is required.'
-            for c in specification:
-                self.criteria.append(c[0])
-                self.benefit[c[0]] = c[1]
-                self.weights[c[0]] = c[2]
+            for c in specification.keys():
+                self.criteria.append(c)
+                self.benefit[c] = specification[c][0]
+                self.weights[c] = specification[c][1]
 
         self.check_input()
 
