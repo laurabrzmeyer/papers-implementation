@@ -28,7 +28,7 @@ This repository was created as a supplement to the article entitled *"Finding th
 - [matplotlib](https://matplotlib.org/)
 - [seaborn](https://seaborn.pydata.org/)
 - [plotly](https://plotly.com/)
-- [mlxtend](https://rasbt.github.io/mlxtend/)
+- [mlxtend](https://rasbt.github.io/mlxtend/) (for S34)
 - [tensorflow](https://www.tensorflow.org/) == 2.1.0 (for L4)
 - [Keras](https://keras.io/) == 2.3.1 (for L4)
 - [scikit-learn](https://scikit-learn.org/stable/) == 0.19.1 (for L7 and L8)
