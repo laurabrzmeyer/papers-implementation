@@ -57,6 +57,5 @@ The following table shows the specifications of the four variants created by com
 | specification  | dictionary  | Dictionary to specify S3 parameters | ``` {'weights':list of float, 'tmax':float} ``` |
 
 ## References:
-- D. Marijan, A. Gotlieb and S. Sen, *"Test Case Prioritization for Continuous Regression Testing: An Industrial Case Study,"* 2013 IEEE International Conference on Software Maintenance, Eindhoven, Netherlands, 2013, pp. 540-543, doi: 10.1109/ICSM.2013.91.
-  
+- D. Marijan, A. Gotlieb and S. Sen, *"Test Case Prioritization for Continuous Regression Testing: An Industrial Case Study,"* 2013 IEEE International Conference on Software Maintenance, Eindhoven, Netherlands, 2013, pp. 540-543, doi: 10.1109/ICSM.2013.91.  
 ℹ️ [ROCKET paper](https://ieeexplore.ieee.org/document/6676952)
