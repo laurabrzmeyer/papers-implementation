@@ -28,9 +28,9 @@ class S22():
     variant_name = name for variant, to get predifined ones: S22.1 and S22.2
     win_size = size of window in cycles (int value)
     INP = object from input_data class
-    criteria_specif = list of tuples following the format (criteria_name:str, criteria_benefit:bool, criteria_weight:float)
+    specification = list of tuples following the format (criteria_name:str, criteria_benefit:bool, criteria_weight:float)
     '''
-    def __init__(self, variant_name, data_input, win_size=1000, criteria_specif=None):
+    def __init__(self, variant_name, data_input, win_size=1000, specification=None):
         self.variant_name = variant_name
         self.INP = data_input
         self.win_size = win_size
@@ -38,21 +38,21 @@ class S22():
         self.benefit = {}               # dictionary with a boolean value for each criterion (True if the aim is to maximize the criterion and False if is to minimize it)
         self.weights = {}               # dictionary with values to weight each criterion
         self.df_prio = pd.DataFrame()   # to save dataframe with tests priorities
-        self.init_S22(criteria_specif)
+        self.init_S22(specification)
 
-    def init_S22(self, criteria_specif):
+    def init_S22(self, specification):
 
-        if((criteria_specif==None)&(self.variant_name=='S22.1')):
+        if((specification==None)&(self.variant_name=='S22.1')):
             self.criteria = ['FailProb', 'ExecTime', 'ReqCov', 'TestCost']
             self.benefit = {'FailProb':True, 'ExecTime':False, 'ReqCov':True, 'Cost':False}
             self.weights = {'FailProb':1.0, 'ExecTime':1.0, 'ReqCov':1.0, 'Cost':1.0}
-        elif((criteria_specif==None)&(self.variant_name=='S22.2')):
+        elif((specification==None)&(self.variant_name=='S22.2')):
             self.criteria = ['FailProb', 'ExecTime', 'ReqCov', 'TestCost']
             self.benefit = {'FailProb':True, 'ExecTime':False, 'ReqCov':True, 'TestCost':False}
             self.weights = {'FailProb':1.0, 'ExecTime':0.0, 'ReqCov':1.0, 'TestCost':1.0}
         else:
-            assert criteria_specif!=None, 'The variant provided is not defined yet! The criteria specification is required.'
-            for c in criteria_specif:
+            assert specification!=None, 'The variant provided is not defined yet! The criteria specification is required.'
+            for c in specification:
                 self.criteria.append(c[0])
                 self.benefit[c[0]] = c[1]
                 self.weights[c[0]] = c[2]
