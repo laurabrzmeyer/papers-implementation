@@ -35,7 +35,7 @@ This repository was created as a supplement to the article entitled *"Finding th
 - [PyQt5](https://www.riverbankcomputing.com/software/pyqt/) (for L7 and L8)
 
 ## Dataset
-Each row of the dataset used as input represents the execution of a test case for validation of a specific version of the SUT. We use a CSV file with semicolon (';') as a separator, like:
+Each row of the dataset used as input represents the execution of a test case for validation of a specific version of the SUT. We use a *CSV* file with semicolon (';') as a separator, like:
 ```python 
 import pandas as pd
 my_dataframe = pd.read_csv('file_name.csv', sep=';', dtype={'col1':int, 'col2':str})
@@ -94,8 +94,44 @@ Pandas will transform it into a dataframe. See below the description of each col
 
 ## Execution of Methods 
 
-### Si
+### Si Methods
+The Python script "*main_Si.py*" has been created to run experiments using the methods **S3**, **S22**, **S26**, and **S34**. To use it, please set the following parameters:
+- *ITERATIONS*: number of repetitions of the experiment to minimize random effects
+- *DATASETS*: list of datasets' names (same as the *CSV* file name)
+- *INPUT_PATH*: path to the datasets (without the *CSV* file name)
+- *OUTPUT_PATH*: path to the folder where output is stored
+- *METHODS*: list of methods to be executed
+- *VARIANTS*: dictionary with the variants for each method in the *METHODS* list
+- *WIN*: dictionary with the window size for each method in the *METHODS* list
+- *BUDGET*: percentage of tests to be selected (if prioritization only, *BUDGET*=1.0)
+- *PARALLEL*: boolean to define whether or not to run experiments in parallel
+- *PARALLEL_POOL_SIZE*: number of pools to run in parallel
 
-### Li
+### Li Methods
+Each Li method has a specific main file ("*main_Li.py*"). To use it, please set the following parameters:
+- *ITERATIONS*: number of repetitions of the experiment to minimize random effects
+- *DATASETS*: list of datasets' names (same as the *CSV* file name)
+- *INPUT_PATH*: path to the datasets (without the *CSV* file name)
+- *OUTPUT_PATH*: path to the folder where output is stored
+- *PARALLEL*: boolean to define whether or not to run experiments in parallel
+- *PARALLEL_POOL_SIZE*: number of pools to run in parallel
+- The variants:
+  - **L4**: *VARIANTS* is a list of variants to be used
+  - **L8**: *REWARDS* is a list of rewards to be used
+  - **L9**: *VARIANTS* is a dictionary with the specification for each variant (policy, reward, EvE balance value, and decay factor)
+- *WIN_SIZE*: the window size can be set to **L9**
+- *BUDGET*: percentage of tests to be selected (need to be set for **L9**)
+- *SCENARIOS_TYPES*: list of scenarios to be considered (need to be set for **L7** and **L8**)
+- *env_names*: dictionary with the name of each environment (need to be set for **L7** and **L8**)
 
-## Evaluation
+## Output
+All methods, except **L7** and **L8**, generate a dataframe as output, which is saved as a *CSV* file.
+| Columns | Type | Description | Specification |
+| ------------- | ------------- | ------------- | ------------- |
+| Experiment | integer | Identifier for the expetiment's iteration | Starts in *0* |
+| Cycle | integer | Identifier for the experiment's cycle | Used for experiments in ascending order |
+| Version | string | The SUT's version | - | 
+| Method  | string | Name of the variant used | It starts with the method's id |
+| Order | list of strings | List of all available tests ordered |  |
+| Selection | list of strings | List of tests selected | Not implemented for **L4** |
+For **L7** and **L8**, all *stats* are saved in a *pickle* format. These files can be converted into a dataframe using the script *s*. The following data:
