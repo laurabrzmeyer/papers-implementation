@@ -5,7 +5,7 @@ RETECS METHOD
 * Available at: https://bitbucket.org/HelgeS/retecs/src/master/run_experiment_common.py
 
 Implementation by Maria Laura Brzezinski Meyer
-Last modification: 06-12-2024
+Last modification: 18-12-2024
 
 References:
     H. Spieker, A. Gotlieb, D. Marijan, and M. Mossige, 
@@ -27,6 +27,10 @@ OUTPUT_PATH = 'Path/To/Output/'
 PARALLEL = True
 PARALLEL_POOL_SIZE = 5
 SCENARIOS_TYPES = ['Verdict', 'Issue']
+env_names = {
+    'dataset1': 'Dataset 1',
+    'dataset2': 'Dataset 2'
+}
 
 CI_CYCLES = 1000
 
@@ -50,12 +54,7 @@ reward_funs = {
     'tcfail': rewards.tcfail
 }
 
-env_names = {
-    'dataset1': 'Dataset 1',
-    'dataset2': 'Dataset 2'
-}
-
-def run_experiments(exp_fun, datasets, ScenarioType, parallel=PARALLEL):
+def run_experiments(exp_fun, datasets, ScenarioType, parallel):
     if parallel:
         p = multiprocessing.Pool(PARALLEL_POOL_SIZE)
         items = []
@@ -103,4 +102,4 @@ def exp_run_industrial_datasets(iteration, datasets, ScenarioType):
 if __name__ == '__main__':
 
     for sc in SCENARIOS_TYPES:
-        run_experiments(exp_run_industrial_datasets, DATASETS, sc, parallel=True)
+        run_experiments(exp_run_industrial_datasets, DATASETS, sc, PARALLEL)
