@@ -5,7 +5,7 @@ RL METHOD
 * Available at: https://bitbucket.org/HelgeS/retecs/src/master/run_experiment_common.py
 
 Implementation by Maria Laura Brzezinski Meyer
-Last modification: 06-12-2024
+Last modification: 18-12-2024
 
 References:
 
@@ -120,5 +120,4 @@ def exp_run_industrial_datasets(iteration, datasets, ScenarioType, reward_names)
 if __name__ == '__main__':
 
     for sc in SCENARIOS_TYPES:
-        for d in DATASETS:
-            run_experiments(exp_run_industrial_datasets, d, sc, REWARDS, ITERATIONS, PARALLEL)
+        run_experiments(exp_run_industrial_datasets, DATASETS, sc, REWARDS, ITERATIONS, PARALLEL)
