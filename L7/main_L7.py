@@ -18,7 +18,9 @@ References:
 
 import multiprocessing
 from pathlib import Path
+
 import agents, rewards, scenarios, l7
+from read_results import read_results
 
 ITERATIONS = 30
 DATASETS = ['Dataset1', 'Dataset2']
@@ -101,5 +103,7 @@ def exp_run_industrial_datasets(iteration, datasets, ScenarioType):
                 
 if __name__ == '__main__':
 
-    for sc in SCENARIOS_TYPES:
-        run_experiments(exp_run_industrial_datasets, DATASETS, sc, PARALLEL)
+    for st in SCENARIOS_TYPES:
+        run_experiments(exp_run_industrial_datasets, DATASETS, st, PARALLEL)
+        for d in DATASETS:
+            read_results(ITERATIONS, d, st, INPUT_PATH, OUTPUT_PATH)
