@@ -36,6 +36,14 @@ The four methods are summarized in the table below:
 
 > <img width="360" alt="image" src="https://github.com/user-attachments/assets/8a226393-1c90-47b2-af87-59b5792e91d6">
 
+## S26 Class
+| Parameter | Type | Description | Specification |
+| ------------- | ------------- | ------------- | ------------- |
+| variant_name  | string  | Name of the variant | Predifined ones: S26.1.1, S26.1.2, S26.2.1, and S26.2.2 |
+| win_size  | int  | Number of cycles to limit history | Default  is 5 | 
+| INP  | input_data()  | To manage history data | Object from input_data class |
+| specification  | dictionary  | Dictionary to specify S26 parameters | ``` {'alpha':float, 'beta':float, 'gamma':float} ``` |
+
 - References:
     * E. Engström, P. Runeson, and A. Ljung, 
     *"Improving Regression Testing Transparency and Efficiency with History-Based Prioritization -- An Industrial Case Study,"* 
