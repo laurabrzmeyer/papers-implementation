@@ -125,7 +125,7 @@ Each Li method has a specific main file ("*main_Li.py*"). To use it, please set 
 - *env_names*: dictionary with the name of each environment (need to be set for **L7** and **L8**)
 
 ## Output
-All methods, except **L7** and **L8**, generate a dataframe as output, which is saved as a *CSV* file.
+All methods generate a dataframe as output, which is saved as a *CSV* file.
 | Columns | Type | Description | Specification |
 | ------------- | ------------- | ------------- | ------------- |
 | Experiment | integer | Identifier for the expetiment's iteration | Starts in *0* |
@@ -134,4 +134,5 @@ All methods, except **L7** and **L8**, generate a dataframe as output, which is 
 | Method  | string | Name of the variant used | It starts with the method's id |
 | Order | list of strings | List of all available tests ordered |  |
 | Selection | list of strings | List of tests selected | Not implemented for **L4** |
-For **L7** and **L8**, all *stats* are saved in a *pickle* format. These files can be converted into a dataframe using the script *s*. The following data:
+
+*️⃣ For **L7** and **L8**, all *stats* are saved in a *pickle* format. These files are converted into a dataframe using the script *read_results.py*.
