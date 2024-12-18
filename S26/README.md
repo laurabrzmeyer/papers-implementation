@@ -44,15 +44,9 @@ The four methods are summarized in the table below:
 | INP  | input_data()  | To manage history data | Object from input_data class |
 | specification  | dictionary  | Dictionary to specify S26 parameters | ``` {'alpha':float, 'beta':float, 'gamma':float} ``` |
 
-- References:
-    * E. Engström, P. Runeson, and A. Ljung, 
-    *"Improving Regression Testing Transparency and Efficiency with History-Based Prioritization -- An Industrial Case Study,"* 
-    2011 Fourth IEEE International Conference on Software Testing, Verification and Validation, Berlin, Germany, 2011, pp. 367-376, 
-    doi: 10.1109/ICST.2011.27.
-    * [EXTFAZ paper](https://ieeexplore.ieee.org/document/5770626)
-
-    * Y. Fazlalizadeh, A. Khalilian, M. Azgomi and S. Parsa, 
-    *"Prioritizing test cases for resource constraint environments using historical test case performance data", *
-    2009 2nd IEEE International Conference on Computer Science and Information Technology, pp. 190-195, 2009,
-    doi: 10.1109/ICCSIT.2009.5234968.
-    * [FAZ paper](https://ieeexplore.ieee.org/abstract/document/5234968)
+## References:
+- E. Engström, P. Runeson, and A. Ljung, *"Improving Regression Testing Transparency and Efficiency with History-Based Prioritization -- An Industrial Case Study,"* 2011 Fourth IEEE International Conference on Software Testing, Verification and Validation, Berlin, Germany, 2011, pp. 367-376, doi: 10.1109/ICST.2011.27.
+-  [EXTFAZ paper](https://ieeexplore.ieee.org/document/5770626)
+  
+-  Y. Fazlalizadeh, A. Khalilian, M. Azgomi and S. Parsa, *"Prioritizing test cases for resource constraint environments using historical test case performance data",*  2009 2nd IEEE International Conference on Computer Science and Information Technology, pp. 190-195, 2009, doi: 10.1109/ICCSIT.2009.5234968.
+-  [FAZ paper](https://ieeexplore.ieee.org/abstract/document/5234968)
