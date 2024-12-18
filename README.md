@@ -132,7 +132,7 @@ All methods generate a dataframe as output, which is saved as a *CSV* file.
 | Cycle | integer | Identifier for the experiment's cycle | Used for experiments in ascending order |
 | Version | string | The SUT's version | - | 
 | Method  | string | Name of the variant used | It starts with the method's id |
-| Order | list of strings | List of all available tests ordered |  |
+| Order | list of strings | List of all available tests ordered | - |
 | Selection | list of strings | List of tests selected | Not implemented for **L4** |
 
 *️⃣ For **L7** and **L8**, all *stats* are saved in a *pickle* format. These files are converted into a dataframe using the script *read_results.py*.
