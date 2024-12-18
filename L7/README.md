@@ -41,7 +41,7 @@ The second one is the *Test Case Failure Reward* (***TCFail***) in the second eq
 In **L7**, the result of a failed test is recorded as zero, i.e. $Result(tc,c)=0* if *tc* failed in *c*. 
 The third reward, *Time-Ranked Reward* (***TRR***), considers the order of each test case, as well as if it has failed. It can be calculated using the third equation below.
 
-> 
+> <img width="350" alt="image" src="https://github.com/user-attachments/assets/d69d2c4c-8492-43e1-b770-d4edccad8910">
 
 To evaluate our first objective (decrease time for fault detection), we prioritize the tests, so all available tests (*T<sub>c</sub>*) will be present in *TS<sub>c</sub>*. 
 It means that the reward ***FailCount*** will always be equal to the number of failed tests and ***TCFail*** will always be the test results. 
@@ -49,8 +49,16 @@ Since the ***TCFail*** reward had the best performance for H. Spieker et al. (20
 Both rewards are given only for the top 40\% tests of *TS<sub>c</sub>*. The reward is zero for the remaining tests. We carried out experiments to validate that this modification does not deteriorate the performance of ***RETECS***. 
 The six variations resulting from the combination of agents (***Tableau*** and ***ANN***) and rewards (***FailCount***, ***TCFail*** and ***TRR***) are shown in the followngi table:
 
-> 
+> <img width="420" alt="image" src="https://github.com/user-attachments/assets/ca7cfe37-d37e-48d6-98c5-cade5a42af5c">
 
-- References:
-    * H. Spieker, A. Gotlieb, D. Marijan, and M. Mossige, *"Reinforcement learning for automatic test case prioritization and selection in continuous integration,"* 26th ACM SIGSOFT International Symposium on Software Testing and Analysis (ISSTA 2017), Santa Barbara, CA, USA, 2017, pp. 12-22, doi: 10.1145/3092703.3092709.
-    * [RETECS paper](https://dl.acm.org/doi/10.1145/3092703.3092709)
+## L7 Variants
+| Parameter | Type | Description | Specification |
+| ------------- | ------------- | ------------- | ------------- |
+| env_names | dictionary  | To name each environment | ``` env_names = {'dataset1': 'Dataset 1', 'dataset2': 'Dataset 2'} ``` |
+| method_names | dictionary | To name each policy | ``` {'mlpclassifier': 'Network', 'tableau': 'Tableau', 'heur_random': 'Random', 'heur_sort': 'Sorting', 'heur_weight': 'Weighting'} ``` | 
+| reward_names | dictionary | To name each reward | ``` {'failcount': 'Failure Count Reward', 'tcfail': 'Test Case Failure Reward', 'timerank': 'Time-ranked Reward'} ``` |
+| reward_funs | dictionary | Function to calcule each reward | ``` {'failcount': rewards.failcount, 'timerank': rewards.timerank, 'tcfail': rewards.tcfail} ``` |
+
+## References:
+- H. Spieker, A. Gotlieb, D. Marijan, and M. Mossige, *"Reinforcement learning for automatic test case prioritization and selection in continuous integration,"* 26th ACM SIGSOFT International Symposium on Software Testing and Analysis (ISSTA 2017), Santa Barbara, CA, USA, 2017, pp. 12-22, doi: 10.1145/3092703.3092709.
+ℹ️ [RETECS paper](https://dl.acm.org/doi/10.1145/3092703.3092709)
