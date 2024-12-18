@@ -2,7 +2,7 @@
 MF and ARM METHODs
 
 Implementation by Maria Laura Brzezinski Meyer
-Last modification: 06-12-2024
+Last modification: 18-12-2024
 
 References:
     J. Anderson, S. Salem and H. Do,
