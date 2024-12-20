@@ -47,8 +47,8 @@ Pandas will transform it into a dataframe. See below the description of each col
 | Cycle  | integer  | Number to order the SUT's versions | Used for experiments in ascending order |
 | Version  | string  | The SUT's version | It is not mandatory | 
 | Test  | string  | Test case identifier/name | Needs to be unique |
-| Result  | string  | The result of the test's execution | Pass=0; Fail=1; NotExecuted=-1 |
-| Duration | integer | Execution duration |  |
+| Result  | integer  | The result of the test's execution | Pass=0; Fail=1; NotExecuted=-1 |
+| Duration | integer | Execution duration | - |
 | RunDate | datetime | Date of execution | It can be a string (format='%Y-%m-%d %H:%M:%S') |
 | Bugs | list of strings | List of bugs founded in the execution | It is mantory if the *Issue* scenario is used |
 
