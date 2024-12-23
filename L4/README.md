@@ -8,7 +8,9 @@ Welcome! This is the implementation of the **DeepOrder** method.
 
 ## Original code
 
-- [ ] [DeepOrder-ICSME21](https://github.com/T3AS/DeepOrder-ICSME21)
+- [ ] [DeepOrder-ICSME21](https://github.com/T3AS/DeepOrder-ICSME21) \
+⚖️ The license of **DeepOrder-ECSME21** is available in this repository under the name **LICENSE_DeepOrder**.
+
 
 ## DeepOrder Description
 
