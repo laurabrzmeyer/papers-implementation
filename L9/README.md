@@ -9,7 +9,8 @@ Welcome! This is the implementation of the **COLEMAN** method.
 ## Based on COLEMAN' original code
 
 - Based on the version available in December 2022 (Realese 1.0)
-- [ ] [COLEMAN](https://github.com/jacksonpradolima/coleman4hcs)
+- [ ] [COLEMAN](https://github.com/jacksonpradolima/coleman4hcs) \
+⚖️ The license of **COLEMAN** is available in this repository under the name **LICENSE_COLEMAN**.
 
 ## COLEMAN Description
 
